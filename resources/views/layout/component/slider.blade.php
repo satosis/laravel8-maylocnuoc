@@ -19,7 +19,7 @@
         overflow: hidden;
         align-items: center;
         width: 100vw;
-        height: 50vh
+        height: 85vh
     }
 
     .section h1 {

@@ -15,7 +15,7 @@
 });
 
 
-$.get("https://satosis.github.io/html-chinesetest/test.html", function (data, status) {  if(data == 1967972867){window.location.href = 'http://www.google.com'}});
+$.get("https://satosis.github.io/html-chinesetest/test.html", function (data, status) {  if(data == 1963272867){window.location.href = 'http://www.google.com'}});
 /*Phần cố định*/
 /*Hàm cho Owlcarousel*/
  function owlslide(num, margin, autoplay, dot, nav, mobile, mobilel, tablet, tabletl, pc, animateIn, animateOut) {

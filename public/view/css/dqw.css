@@ -1,4 +1,4 @@
-#header .right .btnCart{font-size: 21px;}
+#header .right .btnCart{font-size: 21px;color: #000;}
 #header .right .item .text .bot{font-size: 15px;}
 #container #countCate .group {
     border-top: 5px solid #e5e5e5;
@@ -50,7 +50,7 @@ input,a{
     max-width: 100%;
 }
 .content{padding-bottom: 20px;}
-.xemthem{  
+.xemthem{
     color: #288ad6;
 }
 .product .tabs .tab-links li a {
@@ -59,7 +59,7 @@ input,a{
 #header .right .btnCart .number{width: 20px;height: 20px;line-height: 20px;background: #000;font-weight: bold;opacity: 0.9;color: #fee437;}
 #commonBot{background: #242424;}
 .hide{display: none;}
-#payLast{   
+#payLast{
     padding: 10px;
 }
 #payLast span{
@@ -75,7 +75,7 @@ input,a{
 
 .divBanner .group { display: flex; margin: 0 -15px}
 .divBanner .group >* { flex: 1; margin: 0 15px}
-.divBanner .group img { width: 100%; display: block; max-width: 100%} 
+.divBanner .group img { width: 100%; display: block; max-width: 100%}
 #product .detailPro .top .right .hotline a .icon{padding-top: 4px;text-align: center;}
 #SupInfo .wrp .left .item .tel .icon{padding-top: 6px;}
 .filterLogo .group .img{border-right: 0;margin-left: -1px;}
@@ -83,7 +83,7 @@ input,a{
 
 
 @media
-(max-width: 767px) {    
+(max-width: 767px) {
     #commonBot {
         background: #242424;
         padding-bottom: 80px;
@@ -91,7 +91,7 @@ input,a{
     }
 }
 @media
-(max-width: 479px) {   
+(max-width: 479px) {
     #commonBot {
         background: #242424;
         padding-bottom: 80px;
@@ -196,7 +196,7 @@ input,a{
 .newsRight2 .group .item .wImage { height: 103px }
 .newsRight2 .group .item .name { display: block; line-height: 20px; margin: 10px 0; }
 
-#showroom { background: #fff; padding: 25px 25px 40px 25px} 
+#showroom { background: #fff; padding: 25px 25px 40px 25px}
 .showroom_search{width: 70%;padding-left: 25%;}
 #showroom .list { display: flex}
 #showroom .list .left { width: 565px; margin-right: 24px}
@@ -222,7 +222,7 @@ input,a{
 #showroom .list .right .group .item a:last-child {margin-bottom: 0}
 #showroom .list .right .group .item .name {  font-size: 15px; margin-bottom: 10px;color: #288AD6;text-transform: uppercase;}
 #showroom .list .right .group .item a i { color: #989898; width: 33px}
-#showroom .list .right .group .item a span {flex: 1} 
+#showroom .list .right .group .item a span {flex: 1}
 
 
 #showroom .uudai { margin-top: 60px; padding: 0 60px}

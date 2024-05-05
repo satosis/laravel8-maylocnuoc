@@ -64,6 +64,7 @@ b, strong, label, th {
   padding-bottom: 3rem; }
 
 #header {
+  display: flex;
   position: fixed;
   z-index: 10;
   width: 100%;

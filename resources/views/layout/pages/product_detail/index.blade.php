@@ -431,7 +431,7 @@
     <div class="wrp">
         <div class="left">
             <div class="item">
-                <p class="head">Hotline</p>
+                <p class="head">Hotline </p>
                 <a href="tel:18006005" class="tel">
                     <span class="icon"><i class="fa fa-phone"></i></span>
                     <span class="text">1800.6005</span>
@@ -454,7 +454,7 @@
                 </div>
             </div>
             <div class="social">
-                <p class="fs17 ttu mb10">Kết nối mạng xã hội</p>
+                <p class="fs17 ttu mb10">Kết nối mạng xã hội </p>
                 <ul>
                     <li><a rel="nofollow" href="javascript:" target="_blank"><i class="fa fa-facebook-f"></i></a></li>
                     <li><a rel="nofollow" href="javascript:" target="_blank"><i class="fa fa-instagram"></i></a></li>

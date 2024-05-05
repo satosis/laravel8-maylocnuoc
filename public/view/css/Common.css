@@ -1,5 +1,5 @@
 body { color: #333; font-family: Roboto; font-size: 14px; min-width: 1200px; }
-.wrp { margin: auto; width: 1200px; }
+.wrp { margin: auto; width: 85%; }
 .thongke { border-bottom: 2px solid #cdcdcd; color: #909090; font-size: 15px; margin: 0; margin-bottom: 30px; padding: 0; padding-bottom: 7px; width: 100%; }
 .thongke li { display: inline-block; margin-right: 40px }
 .thongke li:after { content: "|"; display: inline-block; margin-left: 40px; margin-top: -6px; vertical-align: middle; }
@@ -59,21 +59,21 @@ span a { -webkit-transition: none; transition: none; }
 #commonHead { background: black; padding: 8px 0; border-bottom: 1px solid #2d2d2d}
 #commonHead .wrp { display: flex; align-items: center; justify-content: space-between}
 #commonHead .textLeft { text-transform: uppercase; color: #5a5a5a; font-family: RobotoB; font-style: italic}
-.frmSearch { display: flex; background: #fff;  width: 435px; height: 35px; overflow: hidden;position:relative}
+.frmSearch { display: flex; background: #fff;  width: 235px; height: 35px; overflow: hidden;position:relative}
 .frmSearch select { width: 90px; height: 35px; border: none; background: transparent; padding: 0 25px; outline: none}
 .frmSearch .flex { flex: 1; display: flex; position: relative}
 .frmSearch .flex .btnSearch { height: 35px;position:absolute;right:0; line-height: 35px; text-align: right;outline:none; background: transparent; border: none; cursor: pointer}
-.frmSearch .flex input { flex: 1; height: 35px; border: none; outline: none; padding: 0 15px; background: transparent}
+.frmSearch .flex input { border: 1px solid #000;flex: 1; height: 35px;  outline: none; padding: 0 15px; background: transparent;    border-radius: 50px;}
 #commonHead .menuRight { display: flex; padding: 0; margin: 0; list-style: none; color: #d3d3d3; text-transform: uppercase; font-size: 12px;}
 #commonHead .menuRight li { padding: 0 10px; position: relative}
 #commonHead .menuRight li:after { content: url(icon/afterMenu.png); position: absolute; top: 50%; transform: translateY(-50%); right: 0}
 #commonHead .menuRight li:last-child:after {display: none}
 #commonHead .menuRight li a:hover {color: #fee437}
-.logo{width:150px}
-#header { background: black; position: relative; z-index: 10}
+.logo{width: 140px;font-weight: bold;}
+#header { background: #fff; position: relative; z-index: 10;color:#000;display: flex;}
 #header .wrp { display: flex; align-items: center; justify-content: space-between}
 #menuMain { margin-left: -10px}
-#menuMain>ul { padding: 0; margin: 0; list-style: none; display: flex; color: #dfdfdf; position: relative}
+#menuMain>ul { padding: 0; margin: 0; list-style: none; display: flex; color: #000; position: relative;font-weight: bold;}
 #menuMain>ul>li>a { text-transform: uppercase; font-family: RobotoM; padding: 25px 20px; position: relative; display: block}
 #menuMain>ul>li>a:before { content: ""; position: absolute; top: 0; left: 20px; width: calc(100% - 40px); height: 2px; background: #fee437; opacity: 0; transition: 0.3s all ease-in-out}
 #menuMain>ul>li>a.active,#menuMain>ul>li>a:hover {color: #fee437}
@@ -81,7 +81,7 @@ span a { -webkit-transition: none; transition: none; }
 #menuMain>ul>li>a:after { content: url(icon/afterSubmenu.png); position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); opacity: 0; transition: 0.3s all ease-in-out; display: none}
 #menuMain>ul>li>a:hover:after {opacity: 1}
 #menuMain>ul>li ul { position: absolute; top: 110%; width: 100%; padding: 0; margin: 0; list-style: none; transition: 0.3s all ease-in-out; opacity: 0; visibility: hidden}
-#menuMain>ul>li .subMenu { background: black; display: flex; padding: 25px 20px;border: 1px solid #2d2d2d}
+#menuMain>ul>li .subMenu { background: white; display: flex; padding: 25px 20px;border: 1px solid #fff}
 #menuMain>ul>li .subMenu .group { flex: 1; padding-right: 10px}
 #menuMain>ul>li .subMenu .group .head { text-transform: uppercase; margin-bottom: 30px; display: block; font-family: RobotoM; }
 #menuMain>ul>li .subMenu .group .item a { display: block; line-height: 20px; margin-bottom: 10px}
@@ -193,13 +193,13 @@ span a { -webkit-transition: none; transition: none; }
 .product .slide .item { width: 100%; margin: 0}
 .product .group.slide {margin-bottom: 30px}
 .product .group.slide .owl-next,
-.product .group.slide .owl-prev { border: 1px solid #ececec; border-radius: 50%; box-shadow: 0 0 4px rgba(255, 255, 255, 0.4); height: 30px; line-height: 30px; text-align: center; top: 50%; transition: 0.3s all ease-in-out; width: 30px; display: inline-block; margin-left: 5px}
+.product .group.slide .owl-prev { position:absolute;border: 1px solid #ececec; border-radius: 50%; box-shadow: 0 0 4px rgba(255, 255, 255, 0.4); height: 30px; line-height: 30px; text-align: center; top: 50%; transition: 0.3s all ease-in-out; width: 30px; display: inline-block; margin-left: 5px}
 .product .group.slide .owl-next { left: inherit; right: -20px; transform: scaleX(-1) }
 .product .group.slide .owl-next:hover,
 .product .group.slide .owl-prev:hover { box-shadow: 0 0 4px rgba(0, 0, 0, 0.3) }
 .product .group.slide .owl-next:after,
 .product .group.slide .owl-prev:after { content: "\f053"; font-family: 'FontAwesome'; font-weight: 900; font-size: 13px}
-.product .group.slide .owl-nav { position: absolute; top: -63px; right: 0}
+.product .group.slide .owl-nav {top: -63px; right: 0}
 
 .sup {background: #f7f7f7}
 
@@ -258,7 +258,7 @@ span a { -webkit-transition: none; transition: none; }
 
 #SupInfo { padding: 30px 0; background: #f7f7f7;}
 #SupInfo .wrp { display: flex; align-items: flex-start}
-#SupInfo .wrp .left { width: 585px; display: flex; }
+#SupInfo .wrp .left { width: 685px; display: flex; }
 #SupInfo .wrp .left .item { flex: 1; display: flex; flex-direction: column; }
 #SupInfo .wrp .left .item .head { text-transform: uppercase; margin-bottom: 10px; font-size: 17px;}
 #SupInfo .wrp .left .item .tel { display: flex;align-items: center}
@@ -287,12 +287,12 @@ span a { -webkit-transition: none; transition: none; }
 #footer .titleHead { position: relative; display: block; text-transform: uppercase; font-size: 19px; font-family: RobotoM; padding-bottom: 15px; border-bottom: 1px solid #ededed; margin-bottom: 28px}
 #footer .titleHead:after { content: ""; height: 1px; width: 70px; position: absolute; bottom: -1px; background: #ec610a; left: 0}
 
-#footer .left { width: 257px; margin-right: 30px}
+#footer .left { width: 50%; margin-right: 30px}
 #footer a:hover {color: #ec610a}
 #footer .left .cont { line-height: 21px; text-align: justify; margin-bottom: 16px}
 #footer .left ul li { line-height: 23px; margin-bottom: 10px; display: flex; }
 #footer .left ul li .icon { width: 28px; font-size: 20px; color: #999; text-align: center}
-#footer .mid { width: 475px;display: flex; }
+#footer .mid { width: 50%;display: flex; }
 #footer .mid .group { flex: 1; padding-right: 20px}
 #footer .mid .group ul li { font-size: 16px; line-height: 22px; margin-bottom: 10px}
 #footer .right {flex: 1}
@@ -575,4 +575,16 @@ legend{
 }
 .box-footer {
    width: 100%;
+}
+.product .group.slide .owl-prev {
+   top: 150px;
+   left: -80px;
+}
+
+.product .group.slide .owl-next {
+   top: 150px;
+   left: 1480px;
+}
+.social{
+padding-left: 161px;
 }

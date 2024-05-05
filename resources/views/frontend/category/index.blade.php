@@ -93,8 +93,10 @@
                     @foreach($products as $list)
                         @include('layout.component.list_product',['list'=>$list])
                     @endforeach
-                    <div class="box-footer">
-                        {!! $products->appends(request()->query())->links() !!}
+                    <div class="text-center" style="position: relative;height: 50px;">
+                        <div class="box-footer" style="position: absolute;left: 40%;">
+                            {!! $products->appends(request()->query())->links() !!}
+                        </div>
                     </div>
                 </div>
 
