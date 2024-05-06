@@ -34,8 +34,9 @@ class ShoppingCartController extends Controller
         return view('layout.pages.cart.index', $viewData, compact('shopping'));
     }
 
-    public function add($id)
+    public function add(Request $request, $id)
     {
+        $type = $request->type;
         $product = Product::find($id);
         if (!$product) return redirect()->to('/');
         Cart::add([
@@ -49,6 +50,9 @@ class ShoppingCartController extends Controller
                 'sale' => $product->pro_sale,
             ]
         ]);
+        if ($type == 2) {
+        return redirect()->route('get.shopping.index');
+    }
         return redirect()->back();
     }
 

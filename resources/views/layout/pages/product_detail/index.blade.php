@@ -66,10 +66,15 @@
                             <span class="num">{{ $product->category->c_name}}</span>
                         </div>
                     </h3>
-                    <div class="btnCart">
+                    <div class="btnCart" style="display: flex">
                         <a class="muangay" href="{{ route('get.shopping.add',$product->id) }}">
-                            <span>Thêm vào giỏ  </span>
-                            <span>Giao hàng miễn phí - Thanh toán tại nhà</span>
+                            <span>Thêm vào giỏ </span>
+                        </a>
+                        <a class="muangay"  style="background: #fed700; margin-left:24px" href="{{ route('get.shopping.add',[
+          'type'=> 2,
+          'id'=> $product->id,
+          ]) }}">
+                            <span>Mua ngay</span>
                         </a>
                     </div>
 

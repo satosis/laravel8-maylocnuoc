@@ -83,7 +83,7 @@
             <li>
                  <a href="/" title="Home" class="logo" >TRANG CHỦ</a>
 </li>
-                <li class="hasChild">
+                <li>
                     <a href="javascript:" title="Máy lọc nước">MÁY LỌC NƯỚC</a>
                     <ul>
                         <li>
@@ -101,7 +101,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="hasChild">
+                <li>
                     <a href="javascript:" title="THIẾT BỊ LỌC NƯỚC">THIẾT BỊ LỌC NƯỚC</a>
                     <ul>
                         <li>
@@ -119,7 +119,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="hasChild">
+                <li>
                     <a href="javascript:" title="THIẾT BỊ ĐO">THIẾT BỊ ĐO</a>
                     <ul>
                         <li>
@@ -153,13 +153,11 @@
 <div  id="menuMain">
         <ul class="menuRight dnTablet-l">
             @if (Auth::check())
-            <li class="hasChild">
-                <a href="{{ route('get.user.profile')}}">
-                    <img class="profile-user-img img-responsive img-circle" src="{{ pare_url_file(Auth::user()->avatar) }}" style="width:50px;height:50px;border-radius: 50%;" alt="User profile picture">
-                </a>
+            <li>
+                <img class="profile-user-img img-responsive img-circle" src="{{ pare_url_file(Auth::user()->avatar) }}" style="width:50px;height:50px;border-radius: 50%;cursor: pointer" alt="User profile picture">
                     <ul>
                         <li>
-                            <div class="subMenu" style="width: 250px;width: 160px;padding: 15px;">
+                            <div class="subMenu" style="width: 160px;">
                                 <div class="group">
                                     <div class="item">
                                         <a href="{{ route('get.user.profile')}}">{{Auth::user()->name}}</a>

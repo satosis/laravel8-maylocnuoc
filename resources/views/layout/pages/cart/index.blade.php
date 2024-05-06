@@ -35,7 +35,7 @@
     }
 </style>
 <link rel="stylesheet" href="{{ asset('view/css/cart.css')  }}">
-<div id="pageway" style="border-bottom: 5px solid #e5e5e5;">
+<div id="pageway" >
     <div class="wrp">
         <ul>
             <li><a href="{{ route('get.home' )}}"><b>TRANG CHỦ</b></a></li>
