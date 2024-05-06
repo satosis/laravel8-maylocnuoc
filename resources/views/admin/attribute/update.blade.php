@@ -8,10 +8,10 @@
                 Thay đổi thông tin sản phẩm
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin.index') }}"> Home</a></li>
-                <li><a href="{{ route('admin.attribute.index') }}">Attribute</li>
+                <li><a href="{{route('admin.index') }}">Trang chủ</a></li>
+                <li><a href="{{ route('admin.attribute.index') }}">Thuộc tính</li>
                 >
-                <li><a href="#">Add</a></li>
+                <li><a href="#">Thêm mới</a></li>
             </ol>
         </section>
 

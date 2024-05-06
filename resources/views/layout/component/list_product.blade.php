@@ -5,7 +5,6 @@
         </a>
     </div>
     <div class="info">
-        <p>40mm | 5ATM | Sapphire</p>
         <a href="{{ route('get.product.detail',$list->pro_slug.'-'.$list->id)}}" class="name">{{ $list->pro_name}}</a>
         <div style="display:flex">
 

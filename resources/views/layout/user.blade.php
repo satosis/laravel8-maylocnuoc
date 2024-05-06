@@ -23,7 +23,12 @@
 <link rel="stylesheet" href="//laz-g-cdn.alicdn.com/lzdfe/account/3.4.33/lib/next-noreset-1.css">
 <link rel="stylesheet" href="//laz-g-cdn.alicdn.com/lzdfe/account/3.4.33/lib/next-noreset-2.css">
 <link rel="stylesheet" href="//laz-g-cdn.alicdn.com/lzdfe/account/3.4.33/pages/change-password-pc/index.css">
+<style>
+    .active {
+        color: #1a9cb7 !important
 
+    }
+</style>
 @extends('layout.home-page')
 @section('content')
     <style>
@@ -53,30 +58,33 @@
                 </p>
             </div>
             <ul class="nav-container">
-                <li class="item" id="Manage-My-Account"><a class="active" href="{{ route('get.user.index') }}">
+                <li class="item" id="Manage-My-Account">
+                    <a class="@if(\Request::route()->getName() == 'get.user.profile') active @endif" href="{{ route('get.user.profile') }}">
                         <span>Quản lý tài khoản</span></a>
                     <ul class="item-container">
-                        <li id="My-profile" class="sub"><a href="{{ route('get.user.profile') }}"
-                            >Thông tin cá nhân</a></li>
-                        <!-- <li id="Address-book" class="sub"><a href="{{ route('get.user.address') }}">Sổ địa chỉ</a></li>
-                <li id="Payment-methods" class="sub"><a href="//checkout.lazada.vn/payment/management"
-                                                                               >Tùy chọn thanh toán</a></li>
-                <li id="Vouchers" class="sub"><a href="#"
-                                                                        >Mã giảm giá</a></li> -->
+                        <li id="My-profile" class="sub">
+                            <a class="@if(\Request::route()->getName() == 'get.user.profile') active @endif" href="{{ route('get.user.profile') }}">Thông tin cá nhân</a>
+                        </li>
                     </ul>
                 </li>
-                <li class="item" id="My-Orders"><a href="{{ route('get.user.orders', ['status' => 0]) }}">
-                        <span>Đơn hàng của tôi</span></a>
+                <li class="item" id="My-Orders">
+                    <a class="@if(\Request::route()->getName() == 'get.user.orders') active @endif" href="{{ route('get.user.orders', ['status' => 0]) }}">
+                        <span>Đơn hàng của tôi</span>
+                    </a>
                     <ul class="item-container">
-                        <li id="Returns" class="sub"><a href="{{ route('get.user.orders', ['status' => 3]) }}">Đơn hàng
-                                đã nhận</a></li>
-                        <li id="Returns" class="sub"><a href="{{ route('get.user.orders', ['status' => 2]) }}">Đơn hàng
+                        <li class="@if(\Request::route()->getName() == 'get.user.orders' && Request('status') == 3) active @endif" id="Returns" class="sub">
+                            <a href="{{ route('get.user.orders', ['status' => 3]) }}">
+                                Đơn hàng đã nhận</a>
+                            </li>
+                        <li class="@if(\Request::route()->getName() == 'get.user.orders' && Request('status') == 2) active @endif" id="Returns" class="sub"><a href="{{ route('get.user.orders', ['status' => 2]) }}">Đơn hàng
                                 đang chờ</a></li>
-                        <li id="Cancellations" class="sub"><a href="{{ route('get.user.orders', ['status' => -1]) }}">Đơn
+                        <li class="@if(\Request::route()->getName() == 'get.user.orders' && Request('status') == -1) active @endif" id="Cancellations" class="sub"><a href="{{ route('get.user.orders', ['status' => -1]) }}">Đơn
                                 hàng hủy</a></li>
                     </ul>
                 </li>
-
+                <li class="@if(\Request::route()->getName() == 'get.user.favourite') active @endif" class="item" id="My-Orders"><a href="{{ route('get.user.favourite') }}">
+                        <span>Sản phẩm yêu thích</span></a>
+                </li>
             </ul>
         </div>
         <html>

@@ -1,17 +1,17 @@
 @extends('layout.admin')
 @section('content')
-    <title>Thêm mới danh mục sản phẩm</title>
+    <title>Thêm mới từ khóa</title>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
-                Thêm mới danh mục sản phẩm
+            <h1 style="margin-left:15px">
+                Thêm mới từ khóa
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin.index') }}"> Home</a></li>
-                <li><a href="{{ route('admin.keyword.index') }}">Keyword</li>
+                <li><a href="{{route('admin.index') }}">Trang chủ</a></li>
+                <li><a href="{{ route('admin.keyword.index') }}">Từ khóa</li>
                 >
-                <li><a href="#">Add</a></li>
+                <li><a href="#">Thêm mới</a></li>
             </ol>
         </section>
 

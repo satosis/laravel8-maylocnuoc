@@ -7,10 +7,10 @@
             <!-- Content Header (Page header) -->
             <h1> Sửa thông tin sản phẩm</h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin.index') }}"> Home</a></li>
-                <li><a href="{{ route('admin.product.index') }}">Product</li>
+                <li><a href="{{route('admin.index') }}">Trang chủ</a></li>
+                <li><a href="{{ route('admin.product.index') }}">Sản phẩm</li>
                 >
-                <li><a href="#" class="active">Update</a></li>
+                <li><a href="#" class="active">Cập nhật</a></li>
             </ol>
         </section>
         <!-- Main content -->

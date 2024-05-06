@@ -242,15 +242,13 @@
                 <div class="item">
                     <p class="head">Hotline</p>
                     <a href="tel:18006005" title="Hotline" class="tel">
-                        <span class="icon"><i class="fa fa-phone"></i></span>
-                        <span class="text">1800.6005</span>
+                        <i class="fa fa-phone" style="padding-right:10px"></i>1800.6005
                     </a>
                 </div>
                 <div class="item">
                     <p class="head">Gọi đặt hàng</p>
                     <a href="tel:0985681189" title="Hotline" class="tel">
-                        <span class="icon"><i class="fa fa-phone"></i></span>
-                        <span class="text">098.568.1189</span>
+                    <i class="fa fa-phone" style="padding-right:10px"></i>098.568.1189
                     </a>
                 </div>
             </div>

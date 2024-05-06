@@ -185,7 +185,7 @@
 
                                     <button class="tac" type="submit" value="2" name="submit">
                                         <p class="ttu fHelveticaNeueB fs15">Thanh toán online</p>
-                                        <p>(PAYPAL)</p>
+                                        <p>(VNPAY)</p>
                                     </button>
 
                             </form>

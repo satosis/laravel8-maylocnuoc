@@ -9,7 +9,7 @@
                 <small><a href="{{ route('admin.category.create') }}" class="btn btn-primary">Thêm mới</a></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin.category.index') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{{route('admin.category.index') }}"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
                 <li class="active">Danh mục</li>
             </ol>
         </section>
@@ -23,9 +23,9 @@
                         <th>#</th>
                         <th>Tên</th>
                         <th>Thể loại</th>
-                        <th>Update</th>
-                        <th>Create</th>
-                        <th>Action</th>
+                        <th>Thời gian cập nhật</th>
+                        <th>Thời gian tạo</th>
+                        <th>Hành động</th>
                     </tr>
                     @if($category)
                         @foreach($category as $list)

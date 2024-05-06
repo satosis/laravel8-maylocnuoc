@@ -9,7 +9,7 @@
                 <small><a href="{{ route('admin.menu.create') }}" class="btn btn-primary">Thêm mới</a></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin.menu.index') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{{route('admin.menu.index') }}"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
                 <li class="active">Danh mục</li>
             </ol>
         </section>
@@ -21,12 +21,12 @@
                     <thead>
                     <th>#</th>
                     <th>Tên</th>
-                    <th>Avatar</th>
+                    <th>Ảnh</th>
                     <th>Status</th>
                     <th>Hot</th>
                     <th>Thời gian tạo</th>
                     <th>Thời gian sửa</th>
-                    <th>Action</th>
+                    <th>Hành động</th>
                     </thead>
                     @if(isset($menu))
                         @foreach($menu as $list)

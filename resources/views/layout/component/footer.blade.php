@@ -9,7 +9,7 @@
                 <ul style="display: block;">
                     <li>
                         <span class="icon"><i class="fa fa-map-marker"></i></span>
-                        <span class="text">VPGD:  Hà Nam</span>
+                        <span class="text">Địa chỉ: Hà Nam</span>
                     </li>
                     <li>
                         <span class="icon"><i class="fa fa-phone"></i></span>
@@ -20,6 +20,27 @@
                         <a href="" title="email" class="text">contact@contact.vn</a>
                     </li>
                 </ul>
+            </div>
+
+
+            <div class="mid">
+                <div class="group">
+                    <a href="javascript://" title="" class="titleHead">Giới thiệu</a>
+                    <ul class="menuFoot">
+                        <li><a href="javascript:" title="Về Ngọc Hân">Về Ngọc Hân</a></li>
+                        <li><a href="javascript:" title="Hệ thống bán máy lọc nước">Hệ thống bán máy lọc nước</a></li>
+                        <li><a href="javascript:" title="Tuyển dụng">Tuyển dụng</a></li>
+                        <li><a href="javascript:" title="Liên hệ với chúng tôi">Liên hệ với chúng tôi</a></li>
+                    </ul>
+                </div>
+                <div class="group">
+                    <a href="javascript://" title="" class="titleHead">Sản phẩm</a>
+                    <ul class="menuFoot">
+                        <li><a href="javascript:" title="MÁY LỌC NƯỚC">MÁY LỌC NƯỚC</a></li>
+                        <li><a href="javascript:" title="THIẾT BỊ LỌC NƯỚC">THIẾT BỊ LỌC NƯỚC</a></li>
+                        <li><a href="javascript:" title="THIẾT BỊ ĐO">THIẾT BỊ ĐO</a></li>
+                    </ul>
+                </div>
                 <div class="group">
                     <a href="javascript://" title="" class="titleHead">Hỗ trợ</a>
                     <ul class="menuFoot">
@@ -32,33 +53,13 @@
                     </ul>
                 </div>
             </div>
-            <div class="mid">
-                <div class="group">
-                    <a href="javascript://" title="" class="titleHead">Sản phẩm</a>
-                    <ul class="menuFoot">
-                        <li><a href="javascript:" title="Dong ho">MÁY LỌC NƯỚC</a></li>
-                        <li><a href="javascript:" title="Kính mát">THIẾT BỊ LỌC NƯỚC</a></li>
-                        <li><a href="javascript:" title="Day dong ho">THIẾT BỊ ĐO</a></li>
-                    </ul>
-                </div>
-            </div>
-            <!-- <div class="right">
-                <a href="javascript://" title="" class="titleHead active">Danh mục</a>
-                <div class="tag" style="display: block;">
-                    <a href="javascript:" title="Cửa hàng">Hệ thống cửa hàng</a>
-                    <a href="javascript:" title="">Góc hỏi đáp</a>
-                    <a href="javascript:" title="Tin tức">Tin tức - Sự kiện</a>
-                    <a href="javascript://" title="">Chứng nhận thương hiệu</a>
-                    <a href="javascript:" title="About us">Giới thiệu</a>
-                </div>
-            </div> -->
         </div>
     </div>
 </div>
 <div id="commonBot">
     <div class="wrp">
         <div class="left text-center">
-            Copyright ©{{ date("Y") }} Cửa hàng NGỌC HÂN
+            Copyright ©{{ date("Y") }} Cửa hàng Ngọc Hân
         </div>
     </div>
 </div>

@@ -12,33 +12,14 @@ use Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Notification;
-use PayPal\Api\Amount;
-use PayPal\Api\Item;
-use PayPal\Api\ItemList;
-use PayPal\Api\Payer;
-use PayPal\Api\Payment;
-use PayPal\Api\PaymentExecution;
-use PayPal\Api\RedirectUrls;
-use PayPal\Api\Transaction;
-use PayPal\Auth\OAuthTokenCredential;
-use PayPal\Rest\ApiContext;
 use Redirect;
 use Session;
 use URL;
+use Illuminate\Support\Facades\Config;
+use Str;
 
-/** All Paypal Details class **/
 class ShoppingCartController extends Controller
 {
-    public function __construct()
-    {
-        //paypal
-        $paypal_conf = \Config::get('paypal');
-        $this->apiContext = new ApiContext(new OAuthTokenCredential(
-                $paypal_conf['client_id'],
-                $paypal_conf['secret'])
-        );
-        $this->apiContext->setConfig($paypal_conf['settings']);
-    }
 
     public function index()
     {
@@ -117,100 +98,66 @@ class ShoppingCartController extends Controller
             ]);
             return redirect()->back();
         }
+        $code = 'SA'. strtoupper(Str::random(10));
         //Thanh toán khi nhận hàng
         if ($request->submit == 1) {
             $this->storeTransaction($data, 1, 1);
         }
 
-        //Thanh toán bằng paypal
+        //Thanh toán bằng vnpay
         if ($request->submit == 2) {
             $data['tst_type'] = 2;
-            $payer = new Payer();
-            $payer->setPaymentMethod('paypal');
-            $shopping = Cart::content();
-            $listItem = [];
-            foreach ($shopping as $key => $list) {
-                $item = new Item();
-                $item->setName($list->name)
-                    ->setCurrency('USD')
-                    ->setQuantity($list->qty)
-                    ->setPrice($list->price * $list->qty / 23000);
-                array_push($listItem, $item);
+            $data['tst_code'] = $code;
+            $this->storeTransaction($data, 1, 2);
+            $vnp_TmnCode = Config::get('env.vnpay.code');
+            $vnp_HashSecret = Config::get('env.vnpay.secret');
+            $vnp_Url = Config::get('env.vnpay.url');
+            $vnp_Returnurl = Config::get('env.vnpay.callback');
+            $vnp_TxnRef = $code;
+            $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
+            $vnp_OrderType = 'billpayment';
+            $vnp_Amount = $request->amount * 100;
+            $vnp_Locale = 'vn';
+            $vnp_IpAddr = request()->ip();
+            $startTime = date("YmdHis");
+            $inputData = array(
+                "vnp_Version" => "2.1.0",
+                "vnp_TmnCode" => $vnp_TmnCode,
+                "vnp_Amount" => $vnp_Amount,
+                "vnp_Command" => "pay",
+                "vnp_CreateDate" => date('YmdHis'),
+                "vnp_CurrCode" => "VND",
+                "vnp_IpAddr" => $vnp_IpAddr,
+                "vnp_Locale" => $vnp_Locale,
+                "vnp_OrderInfo" => $vnp_OrderInfo,
+                "vnp_OrderType" => $vnp_OrderType,
+                "vnp_ReturnUrl" => $vnp_Returnurl,
+                "vnp_TxnRef" => $vnp_TxnRef,
+                "vnp_ExpireDate"=> date('YmdHis',strtotime('+15 minutes',strtotime($startTime)))
+            );
+
+            if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+                $inputData['vnp_BankCode'] = $vnp_BankCode;
             }
-
-            $item_list = new ItemList();
-            $item_list->setItems($listItem);
-            $amount = new Amount();
-            $amount->setCurrency('USD')
-                ->setTotal($request->amount / 23000);
-
-            $transaction = new Transaction();
-            $transaction->setAmount($amount)
-                ->setItemList($item_list)
-                ->setDescription('');
-
-            $redirect_urls = new RedirectUrls();
-            $redirect_urls->setReturnUrl(URL::to('/'))/** Specify return URL **/
-            ->setCancelUrl(URL::to('/'));
-
-            $payment = new Payment();
-            $payment->setIntent('Sale')
-                ->setPayer($payer)
-                ->setRedirectUrls($redirect_urls)
-                ->setTransactions(array($transaction));
-            try {
-                $payment->create($this->apiContext);
-                $data['tst_code'] = $payment->id;
-                $this->storeTransaction($data, 5, 2);
-            } catch (\PayPal\Exception\PPConnectionException $ex) {
-                if (\Config::get('app.debug')) {
-                    Session::flash('toastr', [
-                        'type' => 'error',
-                        'message' => 'Quá thời gian kết nối'
-                    ]);
-                    return redirect()->back();
+            ksort($inputData);
+            $query = "";
+            $i = 0;
+            $hashdata = "";
+            foreach ($inputData as $key => $value) {
+                if ($i == 1) {
+                    $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
                 } else {
-                    Session::flash('toastr', [
-                        'type' => 'error',
-                        'message' => 'Đã xảy ra lỗi ,xin lỗi vì sự bất tiện này'
-                    ]);
-                    return redirect()->back();
+                    $hashdata .= urlencode($key) . "=" . urlencode($value);
+                    $i = 1;
                 }
-            } catch (\PayPal\Exception\PayPalConnectionException  $ex) {
-                if (\Config::get('app.debug')) {
-                    Session::flash('toastr', [
-                        'type' => 'error',
-                        'message' => 'Quá thời gian kết nối'
-                    ]);
-                    return redirect()->back();
-                } else {
-                    Session::flash('toastr', [
-                        'type' => 'error',
-                        'message' => 'Đã xảy ra lỗi ,xin lỗi vì sự bất tiện này'
-                    ]);
-                    return redirect()->back();
-                }
+                $query .= urlencode($key) . "=" . urlencode($value) . '&';
             }
-
-            foreach ($payment->getLinks() as $link) {
-                if ($link->getRel() == 'approval_url') {
-                    $redirect_url = $link->getHref();
-                    break;
-                }
+            $vnp_Url = $vnp_Url . "?" . $query;
+            if (isset($vnp_HashSecret)) {
+                $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
+                $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
             }
-
-            /** add payment ID to session **/
-            Session::put('paypal_payment_id', $payment->getId());
-
-            if (isset($redirect_url)) {
-                return Redirect::away($redirect_url);
-            }
-
-            Session::flash('toastr', [
-                'type' => 'error',
-                'message' => 'Lỗi không xác định'
-            ]);
-            return redirect()->back();
+            return redirect()->to($vnp_Url);
         }
         return redirect()->intended('/');
     }
@@ -232,7 +179,6 @@ class ShoppingCartController extends Controller
         ]);
         if ($transactionId) {
             $shopping = Cart::content();
-            //  Mail::to($data['tst_email'])->send(new TransactionSuccess($shopping));
             foreach ($shopping as $key => $item) {
                 Order::insert([
                     'od_transaction_id' => $transactionId->id,
@@ -242,12 +188,9 @@ class ShoppingCartController extends Controller
                     'od_price' => $item->price
                 ]);
                 //Tăng số lượt mua của sản phẩm
-                \DB::table('product')
-                    ->where('id', $item->id)
-                    ->increment("pro_pay");
-                \DB::table('product')
-                    ->where('id', $item->id)
-                    ->decrement("pro_amount");
+                $product = Product::find($item->id);
+                $product->pro_pay = $product->pro_pay + 1;
+                $product->pro_amount = $product->pro_amount - $item->qty;
             }
         }
 
@@ -255,44 +198,95 @@ class ShoppingCartController extends Controller
             'type' => 'success',
             'message' => 'Đặt hàng thành công'
         ]);
-        Cart::destroy();
+        // Cart::destroy();
         return 1;
     }
 
-    //check status payment of paypal
-    public function getPaymentStatus()
+    public function callback(Request $request)
     {
-        $request = request();//try get from method
+        $apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
+        $vnp_TmnCode = Config::get('env.vnpay.code');
+        $vnp_TransactionDate = $request->vnp_PayDate;
+        $vnp_HashSecret = Config::get('env.vnpay.secret');
+        $vnp_RequestId = rand(1,10000);
+        $vnp_Command = "querydr";
+        $vnp_TxnRef = $request->vnp_TxnRef;
+        $vnp_OrderInfo = "Query transaction";
+        $vnp_CreateDate = date('YmdHis');
+        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
+        $datarq = array(
+            "vnp_RequestId" => $vnp_RequestId,
+            "vnp_Version" => "2.1.0",
+            "vnp_Command" => $vnp_Command,
+            "vnp_TmnCode" => $vnp_TmnCode,
+            "vnp_TxnRef" => $vnp_TxnRef,
+            "vnp_OrderInfo" => $vnp_OrderInfo,
+            //$vnp_TransactionNo= ;
+            "vnp_TransactionDate" => $vnp_TransactionDate,
+            "vnp_CreateDate" => $vnp_CreateDate,
+            "vnp_IpAddr" => $vnp_IpAddr
+        );
 
-        /** Get the payment ID before session clear **/
-        $payment_id = Session::get('paypal_payment_id');
+        $format = '%s|%s|%s|%s|%s|%s|%s|%s|%s';
 
-        /** clear the session payment ID **/
-        Session::forget('paypal_payment_id');
-        //if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-        if (empty($request->PayerID) || empty($request->token)) {
-            Session::put('error', 'Thanh toán thất bại');
-            return Redirect::to('/');
+        $dataHash = sprintf(
+            $format,
+            $datarq['vnp_RequestId'], //1
+            $datarq['vnp_Version'], //2
+            $datarq['vnp_Command'], //3
+            $datarq['vnp_TmnCode'], //4
+            $datarq['vnp_TxnRef'], //5
+            $datarq['vnp_TransactionDate'], //6
+            $datarq['vnp_CreateDate'], //7
+            $datarq['vnp_IpAddr'], //8
+            $datarq['vnp_OrderInfo']//9
+        );
+
+        $checksum = hash_hmac('SHA512', $dataHash, $vnp_HashSecret);
+        $datarq["vnp_SecureHash"] = $checksum;
+        $txnData = $this->callAPI_auth("POST", $apiUrl, json_encode($datarq));
+        $ispTxn = json_decode($txnData, true);
+        $pay = Trans::where('tst_code', $request->vnp_TxnRef)->first();
+        if ($pay) {
+            if($ispTxn['vnp_ResponseCode'] == "00") {
+                $pay->tst_status = 2;
+            } else {
+                $pay->tst_status = -1;
+            }
+            $pay->update();
         }
+        return redirect()->to('/');
+    }
 
-        $payment = Payment::get($payment_id, $this->apiContext);
-        $execution = new PaymentExecution();
-        //$execution->setPayerId(Input::get('PayerID'));
-        $execution->setPayerId($request->PayerID);
-        /**Execute the payment **/
-        $result = $payment->execute($execution, $this->apiContext);
-
-        if ($result->getState() == 'approved') {
-
-            Session::flash('toastr', [
-                'type' => 'success',
-                'message' => 'Thanh toán thành công'
-            ]);
-            //add update record for cart
-            return Redirect::to('/');  //back to product page
-
+    public function callAPI_auth($method, $url, $data) {
+        $curl = curl_init();
+        switch ($method) {
+            case "POST":
+                curl_setopt($curl, CURLOPT_POST, 1);
+                if ($data)
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                break;
+            case "PUT":
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
+                if ($data)
+                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                break;
+            default:
+                if ($data)
+                    $url = sprintf("%s?%s", $url, http_build_query($data));
         }
-        Session::put('error', 'Thanh toán thất bại');
-        return Redirect::to('/');
+        // OPTIONS:
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json'
+        ));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        // EXECUTE:
+        $result = curl_exec($curl);
+        if (!$result) {
+            die("Connection Failure");
+        }
+        curl_close($curl);
+        return $result;
     }
 }

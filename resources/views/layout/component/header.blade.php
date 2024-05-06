@@ -81,12 +81,10 @@
             <ul>
 
             <li>
-                 <a href="/" title="Home" class="logo" >
-            TRANG CHỦ
-        </a>
+                 <a href="/" title="Home" class="logo" >TRANG CHỦ</a>
 </li>
                 <li class="hasChild">
-                    <a href="javascript:" title="Máy lọc nước">Máy lọc nước</a>
+                    <a href="javascript:" title="Máy lọc nước">MÁY LỌC NƯỚC</a>
                     <ul>
                         <li>
                             <div class="subMenu" style="width: 250px;">
@@ -103,8 +101,8 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="javascript:" title="Kinh mat thoi trang">THIẾT BỊ LỌC NƯỚC</a>
+                <li class="hasChild">
+                    <a href="javascript:" title="THIẾT BỊ LỌC NƯỚC">THIẾT BỊ LỌC NƯỚC</a>
                     <ul>
                         <li>
                             <div class="subMenu" style="width: 250px;">
@@ -121,8 +119,8 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="javascript:" title="Phu kien dong ho">THIẾT BỊ ĐO</a>
+                <li class="hasChild">
+                    <a href="javascript:" title="THIẾT BỊ ĐO">THIẾT BỊ ĐO</a>
                     <ul>
                         <li>
                             <div class="subMenu" style="width: 250px;">
@@ -152,12 +150,28 @@
         </form>
 </div>
 
-<div >
+<div  id="menuMain">
         <ul class="menuRight dnTablet-l">
             @if (Auth::check())
-                <li><a href="{{ route('get.user.orders', ['status' => 0]) }}" title="Home">Đơn hàng</a></li>
-                <li><a href="{{ route('get.user.index')}}">{{Auth::user()->name}}</a></li>
-                <li><a href="{{ route('get.logout') }}">Đăng xuất</a></li>
+            <li class="hasChild">
+                <a href="{{ route('get.user.profile')}}">
+                    <img class="profile-user-img img-responsive img-circle" src="{{ pare_url_file(Auth::user()->avatar) }}" style="width:50px;height:50px;border-radius: 50%;" alt="User profile picture">
+                </a>
+                    <ul>
+                        <li>
+                            <div class="subMenu" style="width: 250px;width: 160px;padding: 15px;">
+                                <div class="group">
+                                    <div class="item">
+                                        <a href="{{ route('get.user.profile')}}">{{Auth::user()->name}}</a>
+                                        <a href="{{ route('get.user.orders', ['status' => 0]) }}" title="Home">Đơn hàng</a>
+                                        <a href="{{ route('get.user.favourite') }}" title="Home">Sản phẩm yêu thích</a>
+                                        <a href="{{ route('get.logout') }}">Đăng xuất</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
             @else
                 <li><a href="{{ route('get.login') }}">Đăng nhập</a></li>
                 <li><a href="{{ route('get.register') }}">Đăng ký</a></li>
@@ -165,7 +179,6 @@
         </ul>
     </div>
         <div class="right">
-
             <a href="{{ route('get.shopping.index')}}" class="btnCart" >
                 <i class="fa fa-shopping-cart"></i>
                 <span class="number">{{  Cart::count() }}</span>

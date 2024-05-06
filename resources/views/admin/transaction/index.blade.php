@@ -32,9 +32,9 @@
                                     bỏ
                                 </option>
                             </select>
-                            <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Search</button>
+                            <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Tìm kiếm</button>
                             <button type="submit" name="export" value="true" class="btn btn-info">
-                                <i class="fa fa-save"></i> Export
+                                <i class="fa fa-save"></i> Xuất
                             </button>
                         </form>
                     </div>
@@ -71,7 +71,7 @@
                             <td>@if($list->tst_type ==1 )
                                     Trực tiếp
                                 @elseif($list->tst_type ==2 )
-                                    Paypal
+                                    Vnpay
                                 @endif
                             </td>
                             <td>
@@ -82,10 +82,10 @@
                             <td>
                                 <a data-id="{{ $key }}" href="javascript:;"
                                    data-href="{{ route('ajax.admin.transaction.detail',$list->id)}}" class="label label-primary js-preview-transaction
-      "><i class="fa fa-eye"></i> View</a>
+      "><i class="fa fa-eye"></i> Xem</a>
 
                                 <div class="btn-group">
-                                    <button class="btn btn-success btn-xs">Action</button>
+                                    <button class="btn btn-success btn-xs">Hành động</button>
                                     <button class="btn btn-success  btn-xs dropdown-toggle" data-toggle="dropdown"
                                             aria-expanded="false">
                                         <span class="caret"></span>
@@ -120,7 +120,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Đóng">
                         <span aria-hidden="true">×</span></button>
                     <h4 class="modal-title"> Chi tiết đơn hàng <b id="idTransaction">#1</b></h4>
                 </div>
@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
             <!-- /.modal-content -->

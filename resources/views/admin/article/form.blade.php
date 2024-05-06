@@ -88,7 +88,7 @@
                              onerror="this.onerror=null;this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTzMcYWJkLEXnPD7zTbRwdnNRjjNPJDdP4ePQ&usqp=CAU';"
                              class="img-thumbnail" style="width: 200px;height: 200px;">
                     </div>
-                    <div style="position:relative;"><a class="btn btn-primary" href="javascript:"> Choose File...
+                    <div style="position:relative;"><a class="btn btn-primary" href="javascript:"> Chọn ảnh...
                             <input type="file" accept="image/*"
                                    style="position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;agid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;"
                                    name="a_avatar" size="40" class="js-upload"> </a> &nbsp; <span

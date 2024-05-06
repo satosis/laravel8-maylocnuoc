@@ -94,7 +94,7 @@
                         @include('layout.component.list_product',['list'=>$list])
                     @endforeach
                     <div class="text-center" style="position: relative;height: 50px;">
-                        <div class="box-footer" style="position: absolute;left: 40%;">
+                        <div class="box-footer" style="position: absolute;left: 34%;">
                             {!! $products->appends(request()->query())->links() !!}
                         </div>
                     </div>

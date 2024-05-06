@@ -68,7 +68,7 @@
                     </h3>
                     <div class="btnCart">
                         <a class="muangay" href="{{ route('get.shopping.add',$product->id) }}">
-                            <span>Mua ngay</span>
+                            <span>Thêm vào giỏ  </span>
                             <span>Giao hàng miễn phí - Thanh toán tại nhà</span>
                         </a>
                     </div>
@@ -171,27 +171,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="splienquan">
-                        <div class="item">
-                            <div class="left">
-                                <div class="wImage">
-                                    <a href="javascript://" class="image">
-                                        <img src="{{ $product->pro_avatar }}" class="lazy" src="/view/lazy.jpg"/>
-                                    </a>
-                                </div>
-                                <div class="info">
-                                    <a href="javascript://" class="name">
-                                        {{ $product->pro_name}}
-                                    </a>
-                                    <p class="price">{{ number_format($product->pro_price,0,',','.')}}đ </p>
-                                </div>
-                            </div>
-                            <div class="lstBtn">
-                                <a href="{{ route('get.shopping.add' ,$product->id) }}" class="buttn muangay">Mua
-                                    ngay</a>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="detailRight">
                     <div class="dntablet">
@@ -347,7 +327,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="oper"><span
+                    <div class="oper" style="margin-top:-5px"><span
                                 class="lazada lazada-is-sort lazada-icon oper-icon"></span><span>Sắp xếp:</span><span
                                 class="condition">Liên quan</span></div>
                 </div>
@@ -433,15 +413,13 @@
             <div class="item">
                 <p class="head">Hotline </p>
                 <a href="tel:18006005" class="tel">
-                    <span class="icon"><i class="fa fa-phone"></i></span>
-                    <span class="text">1800.6005</span>
+                <i class="fa fa-phone" style="padding-right:10px"></i>1800.6005
                 </a>
             </div>
             <div class="item">
                 <p class="head">Gọi đặt hàng</p>
                 <a href="tel:0985681189" class="tel">
-                    <span class="icon"><i class="fa fa-phone"></i></span>
-                    <span class="text">098.568.1189</span>
+                <i class="fa fa-phone" style="padding-right:10px"></i>098.568.1189
                 </a>
             </div>
         </div>

@@ -2,11 +2,11 @@
     <tbody>
     <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>Avatar</th>
-        <th>Price</th>
-        <th>Qty</th>
-        <th>Total</th>
+        <th>Tên</th>
+        <th>Ảnh</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Tổng tiền</th>
     </tr>
 
     @foreach($order as $list)

@@ -1,15 +1,5 @@
 <div class="section">
-
-    <div class="sign">
-        <span class="fast-flicker">ECO</span>W<span class="flicker">A</span>TER
-    </div>
-
-    <div class="video-container">
-        <div class="color-overlay"></div>
-        <video autoplay loop muted>
-            <source src="{{ asset('video/water.mp4') }}" type="video/mp4">
-        </video>
-    </div>
+    <img src="https://xulynuocmiennam.com/wp-content/uploads/2016/12/hinh-web-xlnmn-2.jpg" style="width:100vw;">
 </div>
 <style>
     .section {
@@ -19,7 +9,7 @@
         overflow: hidden;
         align-items: center;
         width: 100vw;
-        height: 85vh
+        height: 50vh
     }
 
     .section h1 {

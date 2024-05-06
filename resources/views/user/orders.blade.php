@@ -1,5 +1,10 @@
 @extends('layout.user')
 @section('profile')
+<style>
+    .order-item .item-quantity {
+        width: 250px
+    }
+</style>
     <div class="lzd-playground-right">
         <div class="breadcrumb">
             <a class="first " href="//my.lazada.vn/customer/order/index/">Đơn hàng của tôi</a>
@@ -52,8 +57,8 @@
                                     <p class="text desc"></p>
                                     <p class="text desc bold"></p>
                                 </div>
-                                <div class="item-quantity"><span class="text desc info multiply">Qty:</span><span
-                                            class="text">&nbsp;{{ $list->od_qty }}</span></div>
+                                <div class="item-quantity"><span class="text desc info multiply">Số lượng:</span><span
+                                            class="text">&nbsp;{{ $list->od_qty ?? 0}}</span></div>
                                 <div class="label label-primary">
                                     <p class="capsule
                         @if( $list->tst_status == 2) default @endif
@@ -68,11 +73,10 @@
                 @endforeach
             </div>
         </div>
-    </div>
-    </div>
-    </div>
     <div class="box-footer">
         {!! $transaction->appends(request()->query())->links() !!}
-
+    </div>
+    </div>
+    </div>
     </div>
 @stop

@@ -4,14 +4,14 @@
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>
+            <h1 style="margin-left:15px">
                 Sửa thông tin danh mục sản phẩm
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin.index') }}"> Home</a></li>
-                <li><a href="{{ route('admin.category.index') }}">Category</li>
+                <li><a href="{{route('admin.index') }}">Trang chủ</a></li>
+                <li><a href="{{ route('admin.category.index') }}">Danh mục</li>
                 >
-                <li><a href="#">Edit</a></li>
+                <li><a href="#">Cập nhật</a></li>
             </ol>
         </section>
 

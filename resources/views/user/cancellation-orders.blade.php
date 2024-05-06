@@ -18,7 +18,7 @@
                      <a class="link" href="https://my.lazada.vn/customer/order/view/?tradeOrderId=256012377261185">#256012377261185</a></span>
                                         </div>
                                     </div>
-                                    <span class="pull-right text link bold info-right">XEM THÊM</span></a>
+                                    <span class="pull-right text link bold info-right">Xem thêm</span></a>
                             </div>
                             <div class="order-item">
                                 <div class="item-pic" data-spm="detail_image"><img
@@ -35,7 +35,7 @@
                                         <p class="text desc bold"></p>
                                     </div>
                                 </div>
-                                <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
+                                <div class="item-quantity"><span><span class="text desc info multiply">Số lượng:</span><span
                                                 class="text">&nbsp;1</span></span></div>
                                 <div class="item-status item-capsule">
                                     <p class="capsule">Đã huỷ đơn</p>

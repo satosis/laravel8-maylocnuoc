@@ -142,9 +142,9 @@
                     <div style="margin-bottom: 10px" class="image-area">
                         <img src="{{ $product->pro_avatar ?? asset('view/img/no-image.png') }}" class="img-thumbnail">
                     </div>
-                    <!-- <div style="position:relative;"> <a class="btn btn-primary" href="javascript:;"> Choose File...
+                    <!-- <div style="position:relative;"> <a class="btn btn-primary" href="javascript:;"> Chọn ảnh...
                     <input type="file" name="pro_avatar" size="40" class="d-none js-upload"> </a> &nbsp; <span class="label label-info" id="upload-file-info"></span> </div> -->
-                    <label for="thumbnail-stage" class="btn btn-primary">Choose File...</label>
+                    <label for="thumbnail-stage" class="btn btn-primary">Chọn ảnh...</label>
                     <input class="imageID d-none" type="file" id="thumbnail-stage" name="thumbnail_stage"
                            accept="image/*">
                 </div>
@@ -152,7 +152,7 @@
         </div>
         <div class="col-sm-12 clearfix">
             <div class="box-footer text-center">
-                <a href="{{ route('admin.product.index')}}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Cancel</a>
+                <a href="{{ route('admin.product.index')}}" class="btn btn-default"><i class="fa fa-arrow-left"></i>Quay lại</a>
                 <button type="submit" class="btn btn-success"><i
                             class="fa fa-save"></i>{{ isset($product) ?" Cập nhật" :" Thêm mới"}}</button>
             </div>

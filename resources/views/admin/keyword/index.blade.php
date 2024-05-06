@@ -9,8 +9,8 @@
                 <small><a href="{{ route('admin.keyword.create') }}" class="btn btn-success">Thêm mới</a></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Keyword</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+                <li class="active">Từ khóa</li>
             </ol>
         </section>
 
@@ -23,7 +23,7 @@
                 <td>Mô tả</td>
                 <td>Hot</td>
                 <td>Status</td>
-                <td>Action</td>
+                <td>Hành động</td>
                 </thead>
                 @foreach($keyword as $list)
                     <tbody>
@@ -34,14 +34,14 @@
                         @if($list->k_hot == 1)
                             <a href="{{route('admin.keyword.hot',$list->id) }}" class="btn btn-primary">Hot</a>
                         @else
-                            <a href="{{route('admin.keyword.hot',$list->id) }}" class="btn btn-success">None</a>
+                            <a href="{{route('admin.keyword.hot',$list->id) }}" class="btn btn-success">Không</a>
                         @endif
                     </td>
                     <td>
                         @if($list->k_active == 1)
-                            <a href="{{route('admin.keyword.active',$list->id) }}" class="btn btn-success">Hide</a>
+                            <a href="{{route('admin.keyword.active',$list->id) }}" class="btn btn-success">Ẩn</a>
                         @else
-                            <a href="{{route('admin.keyword.active',$list->id) }}" class="btn btn-primary">Show</a>
+                            <a href="{{route('admin.keyword.active',$list->id) }}" class="btn btn-primary">Hiện</a>
                         @endif
                     </td>
                     <td>

@@ -8,7 +8,7 @@
                 Phản hồi từ khách hàng
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin.rating') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{{route('admin.rating') }}"><i class="fa fa-dashboard"></i> Trang chủ</a></li>
                 <li class="active">Danh sách</li>
             </ol>
         </section>

@@ -58,7 +58,7 @@
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Admini</b>strator </span>
+            <span class="logo-lg"><b>Quản trị viên </b> </span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -76,7 +76,7 @@
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                            <span class="hidden-xs">{{ get_data_user('admins','name') }}</span>
+                            <span class="hidden-xs">Quản trị viên</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -85,27 +85,19 @@
                                      alt="User Image">
 
                                 <p>
-                                    {{ get_data_user('admins','name') }}
-                                    <small>Member since Nov. 2012</small>
+                                    Quản trị viên
                                 </p>
                             </li>
 
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
                                 <div class="pull-right">
-                                    <a href="{{ route('get.logout.admin') }}" class="btn btn-default btn-flat">Sign
-                                        out</a>
+                                    <a href="{{ route('get.logout.admin') }}" class="btn btn-default btn-flat">Đăng xuất</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
+
                 </ul>
             </div>
         </nav>
@@ -120,7 +112,7 @@
                     <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>{{ get_data_user('admins','name') }}</p>
+                    <p>Quản trị viên </p>
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                 </div>
             </div>
@@ -128,6 +120,11 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">Thanh điều hướng</li>
 
+                <li class="">
+                    <a href="{{ route('admin.index') }}">
+                        <i class="fa fa-home"></i> <span>Trang chủ</span>
+                    </a>
+                </li>
                 <li class="">
                     <a href="{{ route('admin.transaction.index') }}">
                         <i class="fa fa-money"></i> <span>Đơn hàng</span>
@@ -149,13 +146,6 @@
                         <i class="fa fa-key"></i>
                         <span>Từ khóa</span>
                     </a>
-                </li>
-                <li class="">
-                    <a href="{{route('admin.article.index') }}">
-                        <i class="fa fa-edit"></i>
-                        <span>Tin tức</span>
-                    </a>
-
                 </li>
                 <li class="">
                     <a href="{{route('admin.user.index') }}">

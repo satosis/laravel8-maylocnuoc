@@ -9,8 +9,8 @@
                 <small><a href="{{ route('admin.attribute.create') }}" class="btn btn-success">Thêm mới</a></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Attribute</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+                <li class="active">Thuộc tính</li>
             </ol>
         </section>
 
@@ -20,11 +20,11 @@
                 <thead>
                 <td>#</td>
                 <td>Thuộc tính</td>
-                <td>Type</td>
-                <td>Category</td>
-                <td>Time</td>
-                <td>Update</td>
-                <td>Action</td>
+                <td>Thể loại</td>
+                <td>Danh mục</td>
+                <td>Thời gian</td>
+                <td>Thời gian cập nhật</td>
+                <td>Hành động</td>
                 </thead>
                 @if (isset($attributes))
                     @foreach($attributes as $list)
@@ -55,4 +55,4 @@
     </div>
     <!-- /.content-wrapper -->
 
-@stop   
+@stop

@@ -8,10 +8,10 @@
                 Thêm mới menu
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('admin.index') }}"> Home</a></li>
+                <li><a href="{{route('admin.index') }}">Trang chủ</a></li>
                 <li><a href="{{ route('admin.menu.index') }}">Menu</li>
                 >
-                <li><a href="#">Add</a></li>
+                <li><a href="#">Thêm mới</a></li>
             </ol>
         </section>
 

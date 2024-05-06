@@ -27,7 +27,7 @@
                                         <p class="text desc bold"></p>
                                     </div>
                                 </div>
-                                <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
+                                <div class="item-quantity"><span><span class="text desc info multiply">Số lượng:</span><span
                                                 class="text">&nbsp;1</span></span></div>
                                 <div class="item-info"></div>
                                 <div class="clear"></div>
@@ -46,7 +46,7 @@
                                         <p class="text desc bold"></p>
                                     </div>
                                 </div>
-                                <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
+                                <div class="item-quantity"><span><span class="text desc info multiply">Số lượng:</span><span
                                                 class="text">&nbsp;2</span></span></div>
                                 <div class="item-info"></div>
                                 <div class="clear"></div>
@@ -64,7 +64,7 @@
                                         <p class="text desc bold"></p>
                                     </div>
                                 </div>
-                                <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
+                                <div class="item-quantity"><span><span class="text desc info multiply">Số lượng:</span><span
                                                 class="text">&nbsp;1</span></span></div>
                                 <div class="item-info"></div>
                                 <div class="clear"></div>
@@ -83,7 +83,7 @@
                                         <p class="text desc bold"></p>
                                     </div>
                                 </div>
-                                <div class="item-quantity"><span><span class="text desc info multiply">Qty:</span><span
+                                <div class="item-quantity"><span><span class="text desc info multiply">Số lượng:</span><span
                                                 class="text">&nbsp;1</span></span></div>
                                 <div class="item-info"></div>
                                 <div class="clear"></div>

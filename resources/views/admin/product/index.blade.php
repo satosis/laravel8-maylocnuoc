@@ -9,8 +9,8 @@
                 <small><a href="{{ route('admin.product.create') }}" class="btn btn-success">Thêm mới</a></small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>Trang chủ</a></li>
+                <li class="active">Sản phẩm</li>
             </ol>
         </section>
 
@@ -22,15 +22,11 @@
                 <td>Tên sản phẩm</td>
                 <td>Giá</td>
                 <td>Giảm giá</td>
-                <td>Giá nhập</td>
-                <td>Thể loại</td>
-                <td>Người đăng</td>
-                <td>Avatar</td>
+                <td>Ảnh</td>
                 <td>Hot</td>
-                <td>Active</td>
-                <td>Pay</td>
-                <td>View</td>
-                <td>Action</td>
+                <td>Trạng thái</td>
+                <td>Số lượt mua</td>
+                <td>Hành động</td>
                 </thead>
                 @foreach($product as $key => $list )
                     <tbody>
@@ -38,26 +34,22 @@
                     <td>{{ $list->pro_name}}</td>
                     <td>{{ $list->pro_price}}</td>
                     <td>{{ $list->pro_sale}}</td>
-                    <td>{{ $list->pro_price_entry}}</td>
-                    <td><span class="label label-info">{{ $list->category->c_cate ??"[N\A]" }}</span></td>
-                    <td>{{ $list->pro_admin_id}}</td>
                     <td><img src="{{ $list->pro_avatar }}" style="width:80px;height:100px"></td>
                     <td>
                         @if($list->pro_hot == 1)
                             <a href="{{route('admin.product.hot',$list->id) }}" class="btn btn-primary">Hot</a>
                         @else
-                            <a href="{{route('admin.product.hot',$list->id) }}" class="btn btn-success">None</a>
+                            <a href="{{route('admin.product.hot',$list->id) }}" class="btn btn-success">Không</a>
                         @endif
                     </td>
                     <td>
                         @if($list->pro_active == 0)
-                            <a href="{{route('admin.product.active',$list->id) }}" class="btn btn-success">Hide</a>
+                            <a href="{{route('admin.product.active',$list->id) }}" class="btn btn-success">Ẩn</a>
                         @else
-                            <a href="{{route('admin.product.active',$list->id) }}" class="btn btn-primary">Show</a>
+                            <a href="{{route('admin.product.active',$list->id) }}" class="btn btn-primary">Hiện</a>
                         @endif
                     </td>
                     <td>{{$list->pro_pay }}</td>
-                    <td>{{$list->pro_view }}</td>
                     <td>
                         <a href="{{route('admin.product.update',$list->id) }}" class="btn btn-primary"><i
                                     class="fa fa-edit"></i> Sửa</a>

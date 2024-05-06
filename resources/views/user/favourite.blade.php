@@ -4,16 +4,12 @@
     <link rel="stylesheet" href="//laz-g-cdn.alicdn.com/lzdfe/checkout/1.3.17/pages/wishlist/index.css">
     <div class="lzd-playground-right">
         <div class="breadcrumb">
-            <a class="first " href="#">Danh sách yêu thích (1)</a>
+            <a class="first " href="#">Danh sách yêu thích ({{ count($products)}})</a>
         </div>
         <div id="container" class="container">
             <div class="wishlist-container">
-                <div class="mod-header-tab"><a href="{{route('get.user.favourite') }}" class="active">Danh sách yêu
-                        thích<span>(1)</span></a> <a href="#" class="">Sản phẩm đã theo dõi</a></div>
-                <div>
                     <div>
                         <div class="wishlist-mod">
-                            <div class="mod-title">Danh sách theo dõi</div>
                             <div class="shops">
                                 @foreach($products as $list)
                                     <div class="shop-items">
@@ -27,10 +23,6 @@
                                                                     style="object-fit:cover"></a></div>
                                                     <div><a class="title"
                                                             href="{{ route('get.category.detail',$list->id)}}">{{ $list->pro_name }}</a>
-                                                    </div>
-                                                    <div class="sku"></div>
-                                                    <div class="oper"><span><span
-                                                                    class="lazada lazada-ic-Delete lazada-icon icon-delete"></span></span>
                                                     </div>
                                                 </div>
                                                 <div class="price">
@@ -47,9 +39,17 @@
 
                                                     @endif
                                                 </div>
-                                                <div class="right-oper"><img
-                                                            src="//laz-img-cdn.alicdn.com/tfs/TB1iUYumfDH8KJjy1XcXXcpdXXa-144-64.png"
-                                                            width="72" height="32"></div>
+                                                <div class="right-oper" style="padding: 5px;margin-left: 100px;">
+                                                    <a href="{{ route('ajax_get.get.user.favourite', $list->id) }}">
+                                                        <i class="fa fa-heart red" style="font-size:25px"></i>
+                                                    </a>
+                                                </div>
+                                                <div class="right-oper">
+                                                    <a class="muangay" href="{{ route('get.shopping.add',$list->id) }}">
+                                                    <img src="//laz-img-cdn.alicdn.com/tfs/TB1iUYumfDH8KJjy1XcXXcpdXXa-144-64.png"
+                                                            width="72" height="32">
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

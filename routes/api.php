@@ -33,7 +33,7 @@ Route::group(['namespace'=>'Api'], function () {
     Route::get('danh-muc/{slug}','CategoryDetailController@getCategoryDetail');
     Route::get('product/{slug}','ProductDetailController@getProductDetail');
     Route::get('san-pham','ProductController@index');
-});  
+});
 
 Route::group(['namespace' => 'Api','middleware' => 'auth:api'], function () {
     Route::prefix('shopping')->group(function(){
@@ -45,3 +45,4 @@ Route::group(['namespace' => 'Api','middleware' => 'auth:api'], function () {
         Route::get('orders/{status}','ShoppingCartController@orders');
     });
 });
+Route::get('/payment/vnpay/callback','Frontend\ShoppingCartController@callback');
