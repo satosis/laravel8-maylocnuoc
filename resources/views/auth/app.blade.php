@@ -1,6 +1,7 @@
 @include('layout.component.header')
 <title>{{isset($login) ? 'Đăng nhập' : '' }} {{isset($register) ? 'Đăng ký  ' : '' }}</title>
-<style> .form-control {
+<style>
+    .form-control {
         display: block;
         width: 100%;
         height: 34px;
@@ -15,7 +16,7 @@
     }
 
     .container {
-        width: 50%;
+        width: 40%;
         margin: 0 auto;
     }
 
@@ -46,7 +47,7 @@
         user-select: none;
         background-image: none;
         border: 1px solid transparent;
-        border-radius: 4px;
+        border-radius: 50px;
     }
 
     label {
@@ -84,40 +85,12 @@
         border-bottom: 2px solid black;
         color: black !important
     }
-
-    .btn-blue {
-        border-radius: 10px;
-        background-color: #3578E5
-    }
-
-    .btn-red {
-        border-radius: 10px;
-        background-color: red
-    }
 </style>
-<div class="container"><br>
-    <div class="login">
-        <h1 class="{{ isset($reset) ? 'd-none' :'' }} text-center">ĐĂNG NHẬP BẰNG</h1><br><br>
-        <a href="{{url('/auth/redirect/google')}}" class="{{ isset($reset) ? 'd-none' :'' }} btn btn-red"><i
-                    class="fa fa-google"></i> GOOGLE</a><br>
-        <br>
-        @php
-            $title ="HOẶC ĐĂNG KÝ TÀI KHOẢN TẠI ĐÂY";
-            if(isset($login)) $title = "HOẶC ĐĂNG NHẬP BẰNG";
-            else if(isset($reset))  $title ="QUÊN MẬT KHẨU";
-
-            $button ="Đăng ký";
-            if(isset($login)) $button = "Đăng nhập";
-            else if(isset($reset))  $button ="Quên mật khẩu";
-
-
-        @endphp
-        <h1 class=""> {{ $title}}</h1><br>
-    </div>
+<div class="container" >
     @if ($errors->first('login'))
         <p class="text-danger">{{$errors->first('login') }}  </p>
     @endif
-    <form action="" method="POST" role="form" class="col-md-8">
+    <form action="" method="POST" role="form" class="col-md-8" style="margin:50px 0">
         @csrf
         <div class="form-group {{ $errors->first('name') ? ' has-error':'' }} {{ isset($reset) ? 'd-none' :'' }} {{ isset($login) ?'d-none' : ''}} ">
             <label for="exampleInputEmail1">Name <b class="red">(*)</b> </label>
@@ -154,17 +127,20 @@
             @endif
         </div>
         <br>
-        <div class="{{ isset($login) ?'' : 'd-none'}}">
-            <input type="checkbox" name="remember" id="feafea">Nhớ mật khẩu<br><br></div>
-        <button type="submit" class="btn btn-primary"> {{ $button }}</button>
-        <a href="{{route('get.home') }}" class="btn btn-danger" style="color:white"><i class="fa fa-undo"></i> Quay lại</a>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary" style="padding: 10px 50px"> {{ isset($login) ? 'Đăng nhập' : 'Đăng ký' }}</button>
+        </div>
 
+        <div class="d-flex" style="display:flex;margin-top:20px">
+        <a class="{{ isset($login) ? 'd-none' :''}}" href="{{route('get.login') }}">Đăng nhập</a><br>
+        <a class="{{ isset($register) ? 'd-none' :''}}" href="{{route('get.register') }}">Đăng ký</a><br>
+        </div>
+        <hr>
+        <a href="{{url('/auth/redirect/google')}}" class="btn btn-danger" style="width: 100%;color:white">
+            <i class="fa fa-google"></i> GOOGLE
+        </a>
     </form>
     <br>
 
-    <div class="d-flex" style="display:flex">
-    <a class="{{ isset($login) ? 'd-none' :''}} btn btn-primary" href="{{route('get.login') }}">Đăng nhập</a><br>
-    <a class="{{ isset($register) ? 'd-none' :''}} btn btn-primary" href="{{route('get.register') }}">Đăng ký</a><br>
-    </div>
 </div>
 @include('layout.component.footer')
