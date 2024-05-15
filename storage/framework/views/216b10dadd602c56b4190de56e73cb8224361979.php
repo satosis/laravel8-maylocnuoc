@@ -1,8 +1,8 @@
-@extends('layout.home-page')
-@section('content')
-    @include('layout.component.slider')
 
-    <title>{{ $title_page ?? $title_page}}</title>
+<?php $__env->startSection('content'); ?>
+    <?php echo $__env->make('layout.component.slider', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+    <title><?php echo e($title_page ?? $title_page); ?></title>
     <br>
 
     <div class="product">
@@ -17,20 +17,20 @@
                 <div class="tabContent">
                     <div id="tab1" class="tab active">
                         <div class="group slide">
-                            @if (isset($productsWatch))
-                                @foreach($productsWatch as $product)
-                                    @include('layout.component.product_item',['product'=>$product])
-                                @endforeach
-                            @endif
+                            <?php if(isset($productsWatch)): ?>
+                                <?php $__currentLoopData = $productsWatch; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php echo $__env->make('layout.component.product_item',['product'=>$product], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div id="tab2" class="tab">
                         <div class="group slide">
-                            @if (isset($productsGlass))
-                                @foreach($productsGlass as $product)
-                                    @include('layout.component.product_item',['product'=>$product])
-                                @endforeach
-                            @endif
+                            <?php if(isset($productsGlass)): ?>
+                                <?php $__currentLoopData = $productsGlass; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php echo $__env->make('layout.component.product_item',['product'=>$product], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </div>
                         <div class="btnXemthem dn">
                             <a href="javascript://" title="xem them" class="xemthem" rel="nofollow">
@@ -43,11 +43,11 @@
                     </div>
                     <div id="tab3" class="tab">
                         <div class="group slide">
-                            @if (isset($productsAccessoriess))
-                                @foreach($productsGlass as $product)
-                                    @include('layout.component.product_item',['product'=>$product])
-                                @endforeach
-                            @endif
+                            <?php if(isset($productsAccessoriess)): ?>
+                                <?php $__currentLoopData = $productsGlass; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php echo $__env->make('layout.component.product_item',['product'=>$product], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </div>
                         <div class="btnXemthem dn">
                             <a href="javascript://" title="" class="xemthem" rel="nofollow">
@@ -84,9 +84,9 @@
                 </a>
             </h2>
             <div class="group slide">
-                @foreach($listProduct1 as $list)
-                    @include('layout.component.list_product',['list'=>$list])
-                @endforeach
+                <?php $__currentLoopData = $listProduct1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo $__env->make('layout.component.list_product',['list'=>$list], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
 
         </div>
@@ -100,9 +100,9 @@
                 </a>
             </h2>
             <div class="group slide">
-                @foreach($listProduct2 as $list)
-                    @include('layout.component.list_product',['list'=>$list])
-                @endforeach
+                <?php $__currentLoopData = $listProduct2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo $__env->make('layout.component.list_product',['list'=>$list], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
 
         </div>
@@ -131,9 +131,9 @@
                 </h2>
             </div>
             <div class="group slide3">
-                @foreach($listProduct3 as $list)
-                    @include('layout.component.list_product',['list'=>$list])
-                @endforeach
+                <?php $__currentLoopData = $listProduct3; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo $__env->make('layout.component.list_product',['list'=>$list], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             </div>
         </div>
@@ -147,9 +147,9 @@
                 </a>
             </h2>
             <div class="group slide">
-                @foreach($listProduct4 as $list)
-                    @include('layout.component.list_product',['list'=>$list])
-                @endforeach
+                <?php $__currentLoopData = $listProduct4; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo $__env->make('layout.component.list_product',['list'=>$list], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             </div>
 
@@ -164,9 +164,9 @@
                 </a>
             </h2>
             <div class="group slide">
-                @foreach($listProduct5 as $list)
-                    @include('layout.component.list_product',['list'=>$list])
-                @endforeach
+                <?php $__currentLoopData = $listProduct5; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo $__env->make('layout.component.list_product',['list'=>$list], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             </div>
 
@@ -195,9 +195,9 @@
                 </h3>
             </div>
             <div class="group slide3">
-                @foreach($listProduct6 as $list)
-                    @include('layout.component.list_product',['list'=>$list])
-                @endforeach
+                <?php $__currentLoopData = $listProduct6; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo $__env->make('layout.component.list_product',['list'=>$list], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
 
         </div>
@@ -242,4 +242,6 @@
         </div>
     </div>
 
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.home-page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\project\tesst\resources\views/welcome.blade.php ENDPATH**/ ?>

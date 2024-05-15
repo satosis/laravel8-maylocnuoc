@@ -29,8 +29,8 @@
 
     }
 </style>
-@extends('layout.home-page')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <style>
         #subiz {
             display: none
@@ -51,28 +51,30 @@
         <div class="lzd-playground-nav">
             <div class="member-info sub" style="font-size:18px;margin-top:2px">
                 <span>Xin chào, </span>
-                <span id="lzd_current_logon_user_name">{{ Auth::user()->name}}</span>
+                <span id="lzd_current_logon_user_name"><?php echo e(Auth::user()->name); ?></span>
             </div>
             <ul class="nav-container">
                 <li class="item" id="Manage-My-Account">
                 </li>
                 <li class="item" id="My-Orders">
-                    <li class="@if(\Request::route()->getName() == 'get.user.profile') active @endif" id="Returns" class="sub" style="margin-top: 25px">
-                        <a href="{{ route('get.user.profile') }}">
+                    <li class="<?php if(\Request::route()->getName() == 'get.user.profile'): ?> active <?php endif; ?>" id="Returns" class="sub" style="margin-top: 25px">
+                        <a href="<?php echo e(route('get.user.profile')); ?>">
                             <span>Thông tin cá nhân</span>
                         </a>
                     </li>
-                    <li class="@if(\Request::route()->getName() == 'get.user.orders' && Request('status') == 0) active @endif" id="Returns" class="sub">
-                        <a href="{{ route('get.user.orders', ['status' => 0]) }}">
+                    <li class="<?php if(\Request::route()->getName() == 'get.user.orders' && Request('status') == 0): ?> active <?php endif; ?>" id="Returns" class="sub">
+                        <a href="<?php echo e(route('get.user.orders', ['status' => 0])); ?>">
                             <span>Đơn hàng của tôi</span>
                         </a>
                         </li>
                 </li>
-                <li class="@if(\Request::route()->getName() == 'get.user.favourite') active @endif" class="item" id="My-Orders"><a href="{{ route('get.user.favourite') }}">
+                <li class="<?php if(\Request::route()->getName() == 'get.user.favourite'): ?> active <?php endif; ?>" class="item" id="My-Orders"><a href="<?php echo e(route('get.user.favourite')); ?>">
                         <span>Sản phẩm yêu thích</span></a>
                 </li>
             </ul>
         </div>
         <html>
-    @yield('profile')
-@stop
+    <?php echo $__env->yieldContent('profile'); ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.home-page', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\project\tesst\resources\views/layout/user.blade.php ENDPATH**/ ?>

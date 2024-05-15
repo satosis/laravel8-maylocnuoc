@@ -14,7 +14,7 @@
         </div>
         <div class="count">
             <div class="bg" style="width: {{ rand(10,100)}}%"></div>
-            <span class="text">Còn lại {{ $list->pro_amount}}</span>
+            <span class="text">Còn lại {{ $list->pro_amount ?? 0}}</span>
         </div>
     </div>
 </div>

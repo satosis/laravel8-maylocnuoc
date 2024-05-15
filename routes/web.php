@@ -6,8 +6,8 @@ Route::get('send-message','RedisController@index');
 Route::post('send-message','RedisController@postSendMessage');
 
 
-Route::get('/data', 'Frontend\HomeController@data'); 
-Route::post('/data', 'Frontend\HomeController@save')->name('data'); 
+Route::get('/data', 'Frontend\HomeController@data');
+Route::post('/data', 'Frontend\HomeController@save')->name('data');
 Route::get('/import-data', 'CreateDatabase@index');
 Route::post('/message/send', ['uses' => 'FrontController@addFeedback', 'as' => 'front.fb']);
 Route::get('/status', 'Frontend\ShoppingCartController@getPaymentStatus')->name('status');
@@ -25,7 +25,7 @@ Route::group(['namespace'=>'Auth','prefix'=>'account'],function(){
 
     Route::get('new-password','ResetPasswordController@NewPassword')->name('get.new_password');
     Route::post('new-password','ResetPasswordController@SavePassword') ;
-});  
+});
 Route::group(['namespace'=>'Frontend'], function () {
     Route::get('','HomeController@index')->name('get.home');
     Route::get('sp/{slug}','ProductDetailController@getProductDetail')->name('get.product.detail');
@@ -37,15 +37,15 @@ Route::group(['namespace'=>'Frontend'], function () {
     Route::get('bai-viet/{slug}','ArticleDetailController@index')->name('get.blog.detail');
     //giỏ hàng
     //https://github.com/bumbummen99/LaravelShoppingcart
-   
-   
-});  
+
+
+});
 Route::post('ckeditor/image_upload', 'CKEditorController@upload')->name('upload');
 
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/login/{provider}/callback', 'SocialController@callback');
 // Route::get('','HomeController@index')->name('get.home');
-include('route-admin.php'); 
+include('route-admin.php');
 include('route-user.php');
 include('cart.php');
 Auth::routes();

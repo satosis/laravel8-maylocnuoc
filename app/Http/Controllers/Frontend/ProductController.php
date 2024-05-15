@@ -40,9 +40,7 @@ class ProductController extends Controller
     if($request->s){
       $request->s ==1 ? $products->orderBy('pro_price','desc') :  $products->orderBy('pro_price','asc') ;
     }
-    $products= $products
-          ->select('id','pro_name','pro_slug','pro_sale','pro_avatar','pro_price','pro_review_total','pro_review_star')
-          ->paginate(20);
+    $products= $products->paginate(20);
     $viewData=[
       'category'      =>$category,
       'title_page'    =>'Kết quả tìm kiếm cho '. $name,

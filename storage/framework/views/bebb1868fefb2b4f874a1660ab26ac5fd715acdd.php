@@ -2,35 +2,35 @@
 <html lang="vi" xml:lang="vi">
 <head>
     <!--CSS-->
-    <title>{{ $title_page ?? 'Hệ thống phân phối và bán lẻ máy lọc nước cao cấp' }}</title>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="{{ asset('view/css/display.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('view/css/chat.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('view/css/animate.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('view/js/owl.carousel.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('view/js/Lightbox/lightbox.min.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('view/js/slick/slick.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('view/css/Common.css') }}" rel="stylesheet"/>
+    <title><?php echo e($title_page ?? 'Hệ thống phân phối và bán lẻ máy lọc nước cao cấp'); ?></title>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
+    <link href="<?php echo e(asset('view/css/display.min.css')); ?>" rel="stylesheet"/>
+    <link href="<?php echo e(asset('view/css/chat.css')); ?>" rel="stylesheet"/>
+    <link href="<?php echo e(asset('view/css/animate.min.css')); ?>" rel="stylesheet"/>
+    <link href="<?php echo e(asset('view/js/owl.carousel.min.css')); ?>" rel="stylesheet"/>
+    <link href="<?php echo e(asset('view/js/Lightbox/lightbox.min.css')); ?>" rel="stylesheet"/>
+    <link href="<?php echo e(asset('view/js/slick/slick.css')); ?>" rel="stylesheet"/>
+    <link href="<?php echo e(asset('view/css/Common.css')); ?>" rel="stylesheet"/>
     <!--CSS Responsive-->
-    <link href="{{ asset('view/css/css_rwd_common.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('view/css/css_rwd.min.css') }}" rel="stylesheet"/>
+    <link href="<?php echo e(asset('view/css/css_rwd_common.css')); ?>" rel="stylesheet"/>
+    <link href="<?php echo e(asset('view/css/css_rwd.min.css')); ?>" rel="stylesheet"/>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
-    <link href="{{ asset('view/css/dqw.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('view/css/news_css_rwd.css') }}" rel="stylesheet"/>
+    <link href="<?php echo e(asset('view/css/dqw.css')); ?>" rel="stylesheet"/>
+    <link href="<?php echo e(asset('view/css/news_css_rwd.css')); ?>" rel="stylesheet"/>
     <!-- toastr -->
-    <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('toastr/toastr.min.css')); ?>">
     <!-- jquery -->
-    <script src="{{ asset('view/js/jquery-1.9.1.min.js') }}"></script>
+    <script src="<?php echo e(asset('view/js/jquery-1.9.1.min.js')); ?>"></script>
 
-    <script src="{{ asset('view/js/stv_new.js') }}"></script>
+    <script src="<?php echo e(asset('view/js/stv_new.js')); ?>"></script>
     <link rel="shortcut icon" href="https://www.dangquangwatch.vn/view/favicon.ico" type="image/x-icon"/>
-    @if(session('toastr'))
+    <?php if(session('toastr')): ?>
         <script>
-            var TYPE_MESSAGE = "{{session('toastr.type') }}";
-            var MESSAGE = "{{session('toastr.message') }}";
+            var TYPE_MESSAGE = "<?php echo e(session('toastr.type')); ?>";
+            var MESSAGE = "<?php echo e(session('toastr.message')); ?>";
 
         </script>
-    @endif
+    <?php endif; ?>
     <script>
         $(function () {
             $(".js-login").on('click', function (event) {
@@ -76,11 +76,11 @@
      attribution="page_inbox"
      page_id="103980634638551">
 </div>
-@include('layout.component.chat')
+<?php echo $__env->make('layout.component.chat', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <div id='status'></div>
 <div id='loader'></div>
 <div id="header">
-    <img src="{{ asset('view/img/logo.png') }}" alt="Logo" class="logo"/>
+    <img src="<?php echo e(asset('view/img/logo.png')); ?>" alt="Logo" class="logo"/>
     <div class="wrp">
         <div id="menuMain">
             <ul>
@@ -95,11 +95,11 @@
                             <div class="subMenu" style="width: 250px;">
                                 <div class="group">
                                     <div class="item">
-                                        @foreach($category as $listcate)
-                                            @if($listcate->c_cate == 'watch')
-                                                <a href="{{ route('get.category.detail',$listcate->c_slug.'-'.$listcate->id) }}">{{ $listcate->c_name}}</a>
-                                            @endif
-                                        @endforeach
+                                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $listcate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($listcate->c_cate == 'watch'): ?>
+                                                <a href="<?php echo e(route('get.category.detail',$listcate->c_slug.'-'.$listcate->id)); ?>"><?php echo e($listcate->c_name); ?></a>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </div>
                                 </div>
                             </div>
@@ -113,11 +113,11 @@
                             <div class="subMenu" style="width: 250px;">
                                 <div class="group">
                                     <div class="item">
-                                        @foreach($category as $listcate)
-                                            @if($listcate->c_cate == 'glass')
-                                                <a href="{{ route('get.category.detail',$listcate->c_slug.'-'.$listcate->id) }}">{{ $listcate->c_name}}</a>
-                                            @endif
-                                        @endforeach
+                                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $listcate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($listcate->c_cate == 'glass'): ?>
+                                                <a href="<?php echo e(route('get.category.detail',$listcate->c_slug.'-'.$listcate->id)); ?>"><?php echo e($listcate->c_name); ?></a>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </div>
                                 </div>
                             </div>
@@ -131,11 +131,11 @@
                             <div class="subMenu" style="width: 250px;">
                                 <div class="group">
                                     <div class="item">
-                                        @foreach($category as $listcate)
-                                            @if($listcate->c_cate == 'accessories')
-                                                <a href="{{ route('get.category.detail',$listcate->c_slug.'-'.$listcate->id) }}">{{ $listcate->c_name}}</a>
-                                            @endif
-                                        @endforeach
+                                        <?php $__currentLoopData = $category; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $listcate): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php if($listcate->c_cate == 'accessories'): ?>
+                                                <a href="<?php echo e(route('get.category.detail',$listcate->c_slug.'-'.$listcate->id)); ?>"><?php echo e($listcate->c_name); ?></a>
+                                            <?php endif; ?>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     </div>
                                 </div>
                             </div>
@@ -146,9 +146,9 @@
         </div>
 
 <div>
-        <form action="{{ route('get.product.index') }}" class="frmSearch" method="get">
+        <form action="<?php echo e(route('get.product.index')); ?>" class="frmSearch" method="get">
             <div class="flex">
-                <input type="text" name="keyword" id="keyword" value="{{ Request('keyword') }}"
+                <input type="text" name="keyword" id="keyword" value="<?php echo e(Request('keyword')); ?>"
                        placeholder="Nhập từ khóa tìm kiếm..."/>
                 <button class="btnSearch"><i class="fa fa-search"></i></button>
             </div>
@@ -157,34 +157,34 @@
 
 <div  id="menuMain">
         <ul class="menuRight dnTablet-l">
-            @if (Auth::check())
+            <?php if(Auth::check()): ?>
             <li>
-                <img class="profile-user-img img-responsive img-circle" src="{{ pare_url_file(Auth::user()->avatar) }}" style="width:50px;height:50px;border-radius: 50%;cursor: pointer" alt="User profile picture">
+                <img class="profile-user-img img-responsive img-circle" src="<?php echo e(pare_url_file(Auth::user()->avatar)); ?>" style="width:50px;height:50px;border-radius: 50%;cursor: pointer" alt="User profile picture">
                     <ul>
                         <li>
                             <div class="subMenu" style="width: 160px;">
                                 <div class="group">
                                     <div class="item">
-                                        <a href="{{ route('get.user.profile')}}">{{Auth::user()->name}}</a>
-                                        <a href="{{ route('get.user.orders', ['status' => 0]) }}" title="Home">Đơn hàng</a>
-                                        <a href="{{ route('get.user.favourite') }}" title="Home">Sản phẩm yêu thích</a>
-                                        <a href="{{ route('get.logout') }}">Đăng xuất</a>
+                                        <a href="<?php echo e(route('get.user.profile')); ?>"><?php echo e(Auth::user()->name); ?></a>
+                                        <a href="<?php echo e(route('get.user.orders', ['status' => 0])); ?>" title="Home">Đơn hàng</a>
+                                        <a href="<?php echo e(route('get.user.favourite')); ?>" title="Home">Sản phẩm yêu thích</a>
+                                        <a href="<?php echo e(route('get.logout')); ?>">Đăng xuất</a>
                                     </div>
                                 </div>
                             </div>
                         </li>
                     </ul>
                 </li>
-            @else
-                <li><a href="{{ route('get.login') }}">Đăng nhập</a></li>
-                <li><a href="{{ route('get.register') }}">Đăng ký</a></li>
-            @endif
+            <?php else: ?>
+                <li><a href="<?php echo e(route('get.login')); ?>">Đăng nhập</a></li>
+                <li><a href="<?php echo e(route('get.register')); ?>">Đăng ký</a></li>
+            <?php endif; ?>
         </ul>
     </div>
         <div class="right">
-            <a href="{{ route('get.shopping.index')}}" class="btnCart" >
+            <a href="<?php echo e(route('get.shopping.index')); ?>" class="btnCart" >
                 <i class="fa fa-shopping-cart"></i>
-                <span class="number">{{  Cart::count() }}</span>
+                <span class="number"><?php echo e(Cart::count()); ?></span>
             </a>
         </div>
     </div>
@@ -216,3 +216,4 @@
      attribution="setup_tool"
      page_id="103980634638551">
 </div>
+<?php /**PATH D:\project\tesst\resources\views/layout/component/header.blade.php ENDPATH**/ ?>

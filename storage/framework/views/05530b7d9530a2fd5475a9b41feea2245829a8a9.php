@@ -1,9 +1,9 @@
-@include('layout.component.header')
-<title>{{ $product->pro_name}}</title>
+<?php echo $__env->make('layout.component.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<title><?php echo e($product->pro_name); ?></title>
 <div id="product">
     <div class="wrp">
         <div class="nameCate lsh">
-            <a href="javascript://" class="name">{{ $product->pro_name}} </a>
+            <a href="javascript://" class="name"><?php echo e($product->pro_name); ?> </a>
         </div>
         <div class="detailPro">
             <div class="top">
@@ -12,82 +12,83 @@
                         <div class="img imgSmall">
                             <div class="wImage">
                                 <a href="javascript://" class="image">
-                                    <img src="{{ $product->pro_avatar }}"/>
+                                    <img src="<?php echo e($product->pro_avatar); ?>"/>
                                 </a>
                             </div>
                         </div>
-                        @if(isset($image))
-                            @foreach($image as $item)
+                        <?php if(isset($image)): ?>
+                            <?php $__currentLoopData = $image; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="img imgSmall">
                                 <div class="wImage">
                                     <a href="javascript://" class="image">
-                                        <img src="{{ pare_url_file($item->al_slug)}}"/>
+                                        <img src="<?php echo e(pare_url_file($item->al_slug)); ?>"/>
                                     </a>
                                 </div>
                             </div>
-                            @endforeach
-                        @endif
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="right">
-                    <h1 style="position:relative"><a href="javascript://" class="namePro">{{ $product->pro_name}}</a> <i
-                                class="fa fa-eye"></i>&nbsp; {{ $product->pro_view }}
-                        <a href="{{ route('ajax_get.user.favourite', $product->id) }}"
-                           class="{{ !Auth::id() ? 'js-login' :''}} js-add-favourite"><i
-                                    class="{{ !$user_favourite ?'fa fa-heart-o' : 'fa fa-heart red' }}"></i></a>&nbsp;<div
+                    <h1 style="position:relative"><a href="javascript://" class="namePro"><?php echo e($product->pro_name); ?></a> <i
+                                class="fa fa-eye"></i>&nbsp; <?php echo e($product->pro_view); ?>
+
+                        <a href="<?php echo e(route('ajax_get.user.favourite', $product->id)); ?>"
+                           class="<?php echo e(!Auth::id() ? 'js-login' :''); ?> js-add-favourite"><i
+                                    class="<?php echo e(!$user_favourite ?'fa fa-heart-o' : 'fa fa-heart red'); ?>"></i></a>&nbsp;<div
                                 class="favourite"
-                                style="position: absolute;bottom: 0;margin-left: 60px;"> {{ $product->pro_favourite }}</div>
+                                style="position: absolute;bottom: 0;margin-left: 60px;"> <?php echo e($product->pro_favourite); ?></div>
                     </h1>
                     <div class="price">
                         <div class="price1">
                             <span class="text">Giá niêm yết </span>
-                            <span class="numb cc4161c">{{ number_price($product->pro_price,$product->pro_sale)}}đ</span>
-                            @if($product->pro_sale > 0)
+                            <span class="numb cc4161c"><?php echo e(number_price($product->pro_price,$product->pro_sale)); ?>đ</span>
+                            <?php if($product->pro_sale > 0): ?>
                                 <span class="numb cc4161c"
-                                      style="text-decoration: line-through;position: absolute;padding: 20px 150px;">{{ number_format($product->pro_price,0,',','.')}}đ</span>
-                            @endif
+                                      style="text-decoration: line-through;position: absolute;padding: 20px 150px;"><?php echo e(number_format($product->pro_price,0,',','.')); ?>đ</span>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <h3 class="descript">
                         <div class="item">
                             <span class="text">Số lượng</span>
-                            <span class="num">{{ $product->pro_amount }}</span>
+                            <span class="num"><?php echo e($product->pro_amount); ?></span>
                         </div>
                         <div class="item">
                             <span class="text">Danh mục</span>
-                            <span class="num">{{ $product->category->c_name}}</span>
+                            <span class="num"><?php echo e($product->category->c_name); ?></span>
                         </div>
                         <div class="item">
                             <span class="text">Nhà cung cấp</span>
-                            <span class="num">{{ $product->admin->name }}</span>
+                            <span class="num"><?php echo e($product->admin->name); ?></span>
                         </div>
                         <div class="item">
                             <span class="text">Đã bán</span>
-                            <span class="num">{{ $product->pro_pay }}</span>
+                            <span class="num"><?php echo e($product->pro_pay); ?></span>
                         </div>
                     </h3>
                     <div class="btnCart" style="display: flex">
-                        <a class="muangay" href="{{ route('get.shopping.add',$product->id) }}">
+                        <a class="muangay" href="<?php echo e(route('get.shopping.add',$product->id)); ?>">
                             <span>Thêm vào giỏ </span>
                         </a>
-                        <a class="muangay"  style="background: #fed700; margin-left:24px" href="{{ route('get.shopping.add',[
+                        <a class="muangay"  style="background: #fed700; margin-left:24px" href="<?php echo e(route('get.shopping.add',[
           'type'=> 2,
           'id'=> $product->id,
-          ]) }}">
+          ])); ?>">
                             <span>Mua ngay</span>
                         </a>
                     </div>
 
-                    @php
+                    <?php
                         $tags=explode(",",$product->keywordseo)
-                    @endphp
-                    @if(count($tags)>1)
+                    ?>
+                    <?php if(count($tags)>1): ?>
                         <legend>Từ khóa</legend>
                         <p><i class="fa fa-tag"></i>
-                            @foreach($tags as $tag)
-                                <a href="javascript:" style=" color: #00d4c0 !important;font-size:20px"># {{$tag}}</a>
-                            @endforeach
-                            @endif
+                            <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <a href="javascript:" style=" color: #00d4c0 !important;font-size:20px"># <?php echo e($tag); ?></a>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </p>
                 </div>
             </div>
@@ -96,14 +97,14 @@
                     <div class="otherPro slideRes">
                         <h3 class="title">Có thể bạn sẽ thích</h3>
                         <div class="group">
-                            @foreach($productSuggest as $productList)
-                                @include('layout.pages.product_detail.product_relate',['product'=>$productList])
-                            @endforeach
+                            <?php $__currentLoopData = $productSuggest; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productList): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php echo $__env->make('layout.pages.product_detail.product_relate',['product'=>$productList], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
                     </div>
                     <div class="dn dbTablet">
                         <div class="thongsokythuat">
-                            <div class="titleR">{{ $product->pro_name}}</div>
+                            <div class="titleR"><?php echo e($product->pro_name); ?></div>
                             <div class="group">
                                 <div class="item">
                                     <p class="text1">Vật liệu</p>
@@ -123,7 +124,7 @@
                                 </div>
                                 <div class="item">
                                     <p class="text1">Danh mục</p>
-                                    <p class="text2">{{ $product->category->c_name}}</p>
+                                    <p class="text2"><?php echo e($product->category->c_name); ?></p>
                                 </div>
                                 <div class="item">
                                     <p class="text1">Giao hàng</p>
@@ -181,7 +182,7 @@
                 <div class="detailRight">
                     <div class="dntablet">
                         <div class="thongsokythuat">
-                            <div class="titleR">{{ $product->pro_name}}</div>
+                            <div class="titleR"><?php echo e($product->pro_name); ?></div>
                             <div class="group">
                                 <div class="item">
                                     <p class="text1">Vật liệu</p>
@@ -201,7 +202,7 @@
                                 </div>
                                 <div class="item">
                                     <p class="text1">Danh mục</p>
-                                    <p class="text2">{{ $product->category->c_name}}</p>
+                                    <p class="text2"><?php echo e($product->category->c_name); ?></p>
                                 </div>
                                 <div class="item">
                                     <p class="text1">Giao hàng</p>
@@ -227,17 +228,17 @@
     <div id="module_product_review" class="pdp-block module">
         <div class="pdp-mod-review">
             <div class="mod-title">
-                <h2 class="pdp-mod-section-title outer-title">Đánh giá và nhận xét của {{ $product->pro_name}}</h2>
+                <h2 class="pdp-mod-section-title outer-title">Đánh giá và nhận xét của <?php echo e($product->pro_name); ?></h2>
             </div>
             <div class="mod-rating">
                 <div class="content">
                     <div class="left">
                         <div class="summary">
-                            <div class="score"><span class="score-average">{{round($product->star,2)}}</span><span
+                            <div class="score"><span class="score-average"><?php echo e(round($product->star,2)); ?></span><span
                                         class="score-max">/5</span></div>
                             <div class="average">
                                 <div class="container-star " style="width: 166.25px; height: 33.25px;">
-                                    @if($product->star==0)
+                                    <?php if($product->star==0): ?>
                                         <img class="star"
                                              src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png"
                                              style="width: 33.25px; height: 33.25px;">
@@ -253,56 +254,56 @@
                                         <img class="star"
                                              src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png"
                                              style="width: 33.25px; height: 33.25px;">
-                                    @else
-                                        @for($i=1;$i<= $product->star;$i++)
+                                    <?php else: ?>
+                                        <?php for($i=1;$i<= $product->star;$i++): ?>
                                             <img class="star"
                                                  src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png"
                                                  style="width: 33.25px; height: 33.25px;">
-                                        @endfor
+                                        <?php endfor; ?>
 
-                                        @if( $product->star < 5)
-                                            @for($i=$product->star+ 1;$i<=5;$i++)
+                                        <?php if( $product->star < 5): ?>
+                                            <?php for($i=$product->star+ 1;$i<=5;$i++): ?>
                                                 <img class="star"
                                                      src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png"
                                                      style="width: 33.25px; height: 33.25px;">
-                                            @endfor
-                                        @endif
-                                    @endif
+                                            <?php endfor; ?>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
-                            <div class="count"> {{$product->star}} đánh giá</div>
+                            <div class="count"> <?php echo e($product->star); ?> đánh giá</div>
                         </div>
-                        @foreach($ratingDefault as $key =>$item)
-                            @php
+                        <?php $__currentLoopData = $ratingDefault; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key =>$item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php
                                 $ageItem=0;
                                 if($product->star >0)
                                 $ageItem = round(($item['count_number'] / $product->star) *100,2);
-                            @endphp
+                            ?>
                             <div class="detail">
                                 <ul>
                                     <li>
                                         <div class="container-star progress-title"
                                              style="width: 79.8px; height: 15.96px;">
-                                            @for($i =1;$i<=$key;$i++)
+                                            <?php for($i =1;$i<=$key;$i++): ?>
                                                 <img class="star"
                                                      src="//laz-img-cdn.alicdn.com/tfs/TB19ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png">
-                                            @endfor
-                                            @for($j=5;$j>$key;$j--)
+                                            <?php endfor; ?>
+                                            <?php for($j=5;$j>$key;$j--): ?>
                                                 <img class="star"
                                                      src="//laz-img-cdn.alicdn.com/tfs/TB18ZvEgfDH8KJjy1XcXXcpdXXa-64-64.png">
-                                            @endfor
+                                            <?php endfor; ?>
                                         </div>
                                         <span class="progress-wrap">
                               <div class="pdp-review-progress">
                                  <div class="bar bg"></div>
-                                 <div class="bar fg" style="width: {{ $ageItem}}%"></div>
+                                 <div class="bar fg" style="width: <?php echo e($ageItem); ?>%"></div>
                               </div>
                            </span>
-                                        <span class="percent"> {{ $item['count_number'] }}</span>
+                                        <span class="percent"> <?php echo e($item['count_number']); ?></span>
                                     </li>
                                 </ul>
                             </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
             </div>
@@ -311,24 +312,24 @@
                     <span class="title">Nhận xét về sản phẩm</span>
                     <div class="oper">
                         <span>Lọc:</span>
-                        @php
+                        <?php
                             $number='Tất cả';
                             for($i=5;$i>=1;$i--)
                             if(Request::get('s') == $i){
                             $number =$i;
                             break;
                             }
-                        @endphp
-                        <span class="condition">{{ $number}} Sao</span>
+                        ?>
+                        <span class="condition"><?php echo e($number); ?> Sao</span>
                         <div class="next-menu next-overlay-inner expandInDown ">
                             <ul class="next-menu-content" style="color: black;">
-                                <li class="{{ Request::get('s') ==6 ?'active' : '' }}"><a
-                                            href="{{ route('get.product.detail',$product->pro_slug.'-'.$product->id )}}">Tất
+                                <li class="<?php echo e(Request::get('s') ==6 ?'active' : ''); ?>"><a
+                                            href="<?php echo e(route('get.product.detail',$product->pro_slug.'-'.$product->id )); ?>">Tất
                                         cả Sao</a></li>
-                                @for($i=5;$i>=1;$i--)
-                                    <li class="{{ Request::get('s') == $i ?'active' : '' }}"><a
-                                                href="{{ request()->fullUrlWithQuery(['s'=>$i]) }}">{{$i}} Sao</a></li>
-                                @endfor
+                                <?php for($i=5;$i>=1;$i--): ?>
+                                    <li class="<?php echo e(Request::get('s') == $i ?'active' : ''); ?>"><a
+                                                href="<?php echo e(request()->fullUrlWithQuery(['s'=>$i])); ?>"><?php echo e($i); ?> Sao</a></li>
+                                <?php endfor; ?>
                             </ul>
                         </div>
                     </div>
@@ -338,18 +339,19 @@
                 </div>
             </div>
             <div class="review_list">
-                @foreach($ratings as $value =>$item)
-                    @include('layout.pages.product_detail.ratings',['rating'=>$item])
-                @endforeach
+                <?php $__currentLoopData = $ratings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value =>$item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php echo $__env->make('layout.pages.product_detail.ratings',['rating'=>$item], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <div class="pagination-link">
-                    {!! $ratings->appends($query ?? [])->links() !!}
+                    <?php echo $ratings->appends($query ?? [])->links(); ?>
+
                 </div>
             </div>
 
-            @if(isset(Auth::user()->id))
+            <?php if(isset(Auth::user()->id)): ?>
                 <div id="block-review">
-                    <form action="{{ route('ajax_post.user.rating.add') }}" class="form-question" method="post">
-                        @csrf
+                    <form action="<?php echo e(route('ajax_post.user.rating.add')); ?>" class="form-question" method="post">
+                        <?php echo csrf_field(); ?>
                         <div class="item">
                             <br><br>
                             <div id="module_product_qna" class="pdp-block module">
@@ -360,13 +362,13 @@
                                     <div class="top">
                                         <div class="container-star starCtn left" id="ratings"
                                              style="width: 223.125px; height: 16.625px;">
-                                            @for ($i=1;$i<=5;$i++)
-                                                <i class="fa fa-star opacity cursor" style="zoom:2" data-i={{$i}}></i>
-                                            @endfor
+                                            <?php for($i=1;$i<=5;$i++): ?>
+                                                <i class="fa fa-star opacity cursor" style="zoom:2" data-i=<?php echo e($i); ?>></i>
+                                            <?php endfor; ?>
                                             <span id="review_text"></span>
                                             <input type="hidden" id="review_value" name="review" value="5">
                                             <input type="hidden" id="product_id" name="product_id"
-                                                   value="{{ $product->id }}">
+                                                   value="<?php echo e($product->id); ?>">
                                         </div>
                                     </div>
                                     <div class="pdp-mod-qna">
@@ -388,24 +390,25 @@
                         </div>
                 </div>
                 </form>
-                @if(!$rating)
+                <?php if(!$rating): ?>
                     <span class="lazada lazada-noReview lazada-icon qna-empty-icon"></span>
                     <div class="qna-empty-text">Chưa có câu hỏi cho sản phẩm này.</div>
                     <div class="qna-empty-text">Đặt câu hỏi cho nhà bán hàng và câu trả lời sẽ được hiển thị tại đây
                     </div>
-                @else
+                <?php else: ?>
                     <div class="qna-section-title">Câu hỏi của tôi</div>
                     <ul class="qna-list">
                         <div class="review_list_personal"></div>
-                        @foreach($rating as $value =>$item)
-                            @include('layout.pages.product_detail.personal_rating',['rating'=>$item])
-                        @endforeach
-                        {!! $rating->links() !!}
+                        <?php $__currentLoopData = $rating; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $value =>$item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php echo $__env->make('layout.pages.product_detail.personal_rating',['rating'=>$item], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php echo $rating->links(); ?>
+
                         <br><br><br>
                     </ul>
-                @endif
+                <?php endif; ?>
         </div>
-        @endif
+        <?php endif; ?>
     </div>
 </div>
 </div>
@@ -447,7 +450,7 @@
         </div>
     </div>
 </div>
-@include('layout.component.footer')
+<?php echo $__env->make('layout.component.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <script>
@@ -546,3 +549,4 @@
         }
     })
 </script>
+<?php /**PATH D:\project\tesst\resources\views/layout/pages/product_detail/index.blade.php ENDPATH**/ ?>

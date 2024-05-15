@@ -46,12 +46,12 @@ class CategoryDetailController extends Controller
                 $request->s ==1 ? $products->orderBy('pro_price','desc') :  $products->orderBy('pro_price','asc') ;
             }
             $products=$products->paginate(15);
-             $viewData=[
-                'category'   => $category,
-                'cate'       => $cate,
-                'title_page' => $cate->c_name,
-                'products'   => $products
-             ];
+            $viewData=[
+            'category'   => $category,
+            'cate'       => $cate,
+            'title_page' => $cate->c_name,
+            'products'   => $products
+            ];
         return view('frontend.category.index',$viewData);
         }
        return redirect()->to('/');

@@ -1,10 +1,10 @@
 <?php
 return [
     'app_url' => env('APP_URL'),
-    'vnpay' => [
-        'code'        => env('VNPAY_CODE',null),
-        'secret'     => env('VNPAY_SECRET', null),
-        'url'     => "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html",
-        'callback' => env('VNPAY_CALLBACK_URL', null),
-    ],
+    'momo' => [
+        'partner_code'   => env('MOMO_PARTNER_CODE',null),
+        'access_key'     => env('MOMO_ACCESS_KEY', null),
+        'secret_key'     => env('MOMO_SECRET_KEY', null),
+        'callback_url' => env('MOMO_CALLBACK_URL', null),
+    ]
 ];

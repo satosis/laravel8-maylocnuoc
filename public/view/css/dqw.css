@@ -57,7 +57,7 @@ input,a{
     padding: 8px 8px;
 }
 #header .right .btnCart .number{width: 20px;height: 20px;line-height: 20px;background: #000;font-weight: bold;opacity: 0.9;color: #fee437;}
-#commonBot{background: #242424;}
+#commonBot{background: #242424;width: 100vw;}
 .hide{display: none;}
 #payLast{
     padding: 10px;

@@ -52,7 +52,7 @@
         animation: shine 2s forwards, flicker 3s infinite;
     }
 
-    @keyframes blink {
+    @keyframes  blink {
         0%,
         22%,
         36%,
@@ -82,7 +82,7 @@
         animation: shine 2s forwards, blink 10s 1s infinite;
     }
 
-    @keyframes shine {
+    @keyframes  shine {
         0% {
             color: #6b1839;
             text-shadow: none;
@@ -95,7 +95,7 @@
         }
     }
 
-    @keyframes flicker {
+    @keyframes  flicker {
         from {
             opacity: 1;
         }
@@ -222,3 +222,4 @@
     }
 
 </style>
+<?php /**PATH D:\project\tesst\resources\views/layout/component/slider.blade.php ENDPATH**/ ?>

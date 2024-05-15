@@ -59,17 +59,17 @@
 <div id="commonBot">
     <div class="wrp">
         <div class="left text-center">
-            Copyright ©{{ date("Y") }} Cửa hàng Ngọc Hân
+            Copyright ©<?php echo e(date("Y")); ?> Cửa hàng Ngọc Hân
         </div>
     </div>
 </div>
 <script src="https://use.fontawesome.com/452826394c.js"></script>
-<script src="{{ asset('view/lazyload.min.js') }}"></script>
-<script src="{{ asset('view/js/owl.carousel.min.js') }}"></script>
-<script src="{{ asset('view/js/Lightbox/lightbox.min.js') }}"></script>
-<script src="{{ asset('view/js/slick/slick.js') }}"></script>
-<script src="{{ asset('view/js/Common.js') }}"></script>
-<script src="{{ asset('toastr/toastr.min.js') }}"></script>
+<script src="<?php echo e(asset('view/lazyload.min.js')); ?>"></script>
+<script src="<?php echo e(asset('view/js/owl.carousel.min.js')); ?>"></script>
+<script src="<?php echo e(asset('view/js/Lightbox/lightbox.min.js')); ?>"></script>
+<script src="<?php echo e(asset('view/js/slick/slick.js')); ?>"></script>
+<script src="<?php echo e(asset('view/js/Common.js')); ?>"></script>
+<script src="<?php echo e(asset('toastr/toastr.min.js')); ?>"></script>
 <script>
     if (typeof TYPE_MESSAGE != "undefined") {
         switch (TYPE_MESSAGE) {
@@ -84,3 +84,4 @@
 </script>
 </body>
 </html>
+<?php /**PATH D:\project\tesst\resources\views/layout/component/footer.blade.php ENDPATH**/ ?>

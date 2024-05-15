@@ -71,7 +71,7 @@ class RegisterController extends Controller
                 'message' => 'Chào mừng bạn đến với shop chúng tôi'
             ]);
 
-            Mail::to($request->email)->send(new RegisterSuccess($request->name));
+            // Mail::to($request->email)->send(new RegisterSuccess($request->name));
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 return redirect()->intended('/');
             }

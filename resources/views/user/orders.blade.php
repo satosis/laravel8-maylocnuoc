@@ -36,7 +36,7 @@
                     </div>
                 @endif
                 @foreach($transaction as $key => $list)
-                    @if($key == 0 &&  isset($transaction[$key+1]) && $transaction[$key]->trans_id  === $transaction[$key+1]->trans_id || isset($transaction[$key-1]) && $transaction[$key]->trans_id  !== $transaction[$key-1]->trans_id || !isset($transaction[$key+1]) || $key == 0)
+                    @if($key == 0 && isset($transaction[$key+1]) && $transaction[$key]->trans_id  === $transaction[$key+1]->trans_id || isset($transaction[$key-1]) && $transaction[$key]->trans_id  !== $transaction[$key-1]->trans_id || !isset($transaction[$key+1]) || $key == 0)
                         <div class="order">
                             <div class="order-info">
                                 <div class="pull-left">
@@ -61,10 +61,10 @@
                                             class="text">&nbsp;{{ $list->od_qty ?? 0}}</span></div>
                                 <div class="label label-primary">
                                     <p class="capsule
-                        @if( $list->tst_status == 2) default @endif
-                        @if( $list->tst_status == 3) success @endif
-                        @if( $list->tst_status == -1) error @endif
-                        ">{{ $list->getStatus($list->tst_status)['name'] }}</p>
+                                        @if( $list->tst_status == 2) default @endif
+                                        @if( $list->tst_status == 3) success @endif
+                                        @if( $list->tst_status == -1) error @endif
+                                        ">{{ $list->getStatus($list->tst_status)['name'] }}</p>
                                 </div>
                             </div>
                             @if($key == 0 && isset($transaction[$key+1])  && $transaction[$key]->trans_id  != $transaction[$key+1]->trans_id || isset($transaction[$key+1]) && $transaction[$key]->trans_id  !== $transaction[$key+1]->trans_id|| !isset($transaction[$key+1])  || $key == 0)

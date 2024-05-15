@@ -51,8 +51,8 @@ class ShoppingCartController extends Controller
             ]
         ]);
         if ($type == 2) {
-        return redirect()->route('get.shopping.index');
-    }
+            return redirect()->route('get.shopping.index');
+        }
         return redirect()->back();
     }
 
@@ -95,7 +95,29 @@ class ShoppingCartController extends Controller
     public function postPay(Request $request)
     {
         $data = $request->except('_token', 'submit');
-        if ($request->amount == 0) {
+        if (strlen($request->tst_phone) < 10 || strlen($request->tst_phone) > 11) {
+            Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Số điện thoại không hợp lệ'
+            ]);
+            return redirect()->back();
+        }
+        if (strlen($request->tst_name) > 255) {
+            Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Tên người nhận không hợp lệ'
+            ]);
+            return redirect()->back();
+        }
+        if (strlen($request->tst_address) > 255) {
+            Session::flash('toastr', [
+                'type' => 'error',
+                'message' => 'Địa chỉ không hợp lệ'
+            ]);
+            return redirect()->back();
+        }
+        $amount = $request->amount;
+        if ($amount == 0) {
             Session::flash('toastr', [
                 'type' => 'error',
                 'message' => 'Giỏ hàng không có sản phẩm nào'
@@ -108,60 +130,41 @@ class ShoppingCartController extends Controller
             $this->storeTransaction($data, 1, 1);
         }
 
-        //Thanh toán bằng vnpay
+        //Thanh toán bằng momo
         if ($request->submit == 2) {
             $data['tst_type'] = 2;
             $data['tst_code'] = $code;
-            $this->storeTransaction($data, 1, 2);
-            $vnp_TmnCode = Config::get('env.vnpay.code');
-            $vnp_HashSecret = Config::get('env.vnpay.secret');
-            $vnp_Url = Config::get('env.vnpay.url');
-            $vnp_Returnurl = Config::get('env.vnpay.callback');
-            $vnp_TxnRef = $code;
-            $vnp_OrderInfo = "Thanh toán hóa đơn phí dich vụ";
-            $vnp_OrderType = 'billpayment';
-            $vnp_Amount = $request->amount * 100;
-            $vnp_Locale = 'vn';
-            $vnp_IpAddr = request()->ip();
-            $startTime = date("YmdHis");
-            $inputData = array(
-                "vnp_Version" => "2.1.0",
-                "vnp_TmnCode" => $vnp_TmnCode,
-                "vnp_Amount" => $vnp_Amount,
-                "vnp_Command" => "pay",
-                "vnp_CreateDate" => date('YmdHis'),
-                "vnp_CurrCode" => "VND",
-                "vnp_IpAddr" => $vnp_IpAddr,
-                "vnp_Locale" => $vnp_Locale,
-                "vnp_OrderInfo" => $vnp_OrderInfo,
-                "vnp_OrderType" => $vnp_OrderType,
-                "vnp_ReturnUrl" => $vnp_Returnurl,
-                "vnp_TxnRef" => $vnp_TxnRef,
-                "vnp_ExpireDate"=> date('YmdHis',strtotime('+15 minutes',strtotime($startTime)))
-            );
-
-            if (isset($vnp_BankCode) && $vnp_BankCode != "") {
-                $inputData['vnp_BankCode'] = $vnp_BankCode;
-            }
-            ksort($inputData);
-            $query = "";
-            $i = 0;
-            $hashdata = "";
-            foreach ($inputData as $key => $value) {
-                if ($i == 1) {
-                    $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
-                } else {
-                    $hashdata .= urlencode($key) . "=" . urlencode($value);
-                    $i = 1;
-                }
-                $query .= urlencode($key) . "=" . urlencode($value) . '&';
-            }
-            $vnp_Url = $vnp_Url . "?" . $query;
-            if (isset($vnp_HashSecret)) {
-                $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//
-                $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
-            }
-            return redirect()->to($vnp_Url);
+            $latestId = $this->storeTransaction($data, 1, 2);
+            $endpoint = "https://test-payment.momo.vn/v2/gateway/api/create";
+            $partnerCode = Config::get('env.momo.partner_code');
+            $accessKey = Config::get('env.momo.access_key');
+            $secretKey = Config::get('env.momo.secret_key');
+            $orderId = $latestId . '-SA'. strtoupper(Str::random(10));
+            $orderInfo = "Thanh toán qua MoMo";
+            $ipnUrl = Config::get('env.momo.callback_url');
+            $redirectUrl = Config::get('env.momo.callback_url');
+            $extraData = "";
+            $requestId = time() . "";
+            $requestType = "payWithATM";
+            //before sign HMAC SHA256 signature
+            $rawHash = "accessKey=" . $accessKey . "&amount=" . $amount . "&extraData=" . $extraData . "&ipnUrl=" . $ipnUrl . "&orderId=" . $orderId . "&orderInfo=" . $orderInfo . "&partnerCode=" . $partnerCode . "&redirectUrl=" . $redirectUrl . "&requestId=" . $requestId . "&requestType=" . $requestType;
+            $signature = hash_hmac("sha256", $rawHash, $secretKey);
+            $data = array('partnerCode' => $partnerCode,
+                'partnerName' => "Test",
+                "storeId" => "MomoTestStore",
+                'requestId' => $requestId,
+                'amount' => $amount,
+                'orderId' => $orderId,
+                'orderInfo' => $orderInfo,
+                'redirectUrl' => $redirectUrl,
+                'ipnUrl' => $ipnUrl,
+                'lang' => 'vi',
+                'extraData' => $extraData,
+                'requestType' => $requestType,
+                'signature' => $signature);
+            $result = $this->execPostRequest($endpoint, json_encode($data));
+            $jsonResult = json_decode($result, true);
+            return redirect()->to($jsonResult['payUrl']);
         }
         return redirect()->intended('/');
     }
@@ -169,7 +172,7 @@ class ShoppingCartController extends Controller
     //store transaction to database
     public function storeTransaction($data, $status, $type)
     {
-        $transactionId = Trans::create([
+        $transaction = Trans::create([
             'tst_user_id' => Auth::id(),
             'tst_total_money' => $data['amount'],
             'tst_name' => $data['tst_name'],
@@ -181,11 +184,11 @@ class ShoppingCartController extends Controller
             'tst_status' => $status,
             'tst_type' => $type,
         ]);
-        if ($transactionId) {
+        if ($transaction) {
             $shopping = Cart::content();
             foreach ($shopping as $key => $item) {
                 Order::insert([
-                    'od_transaction_id' => $transactionId->id,
+                    'od_transaction_id' => $transaction->id,
                     'od_product_id' => $item->id,
                     'od_sale' => $item->options->sale,
                     'od_qty' => $item->qty,
@@ -203,56 +206,38 @@ class ShoppingCartController extends Controller
             'message' => 'Đặt hàng thành công'
         ]);
         // Cart::destroy();
-        return 1;
+        return $transaction->id;
     }
 
     public function callback(Request $request)
     {
-        $apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
-        $vnp_TmnCode = Config::get('env.vnpay.code');
-        $vnp_TransactionDate = $request->vnp_PayDate;
-        $vnp_HashSecret = Config::get('env.vnpay.secret');
-        $vnp_RequestId = rand(1,10000);
-        $vnp_Command = "querydr";
-        $vnp_TxnRef = $request->vnp_TxnRef;
-        $vnp_OrderInfo = "Query transaction";
-        $vnp_CreateDate = date('YmdHis');
-        $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
-        $datarq = array(
-            "vnp_RequestId" => $vnp_RequestId,
-            "vnp_Version" => "2.1.0",
-            "vnp_Command" => $vnp_Command,
-            "vnp_TmnCode" => $vnp_TmnCode,
-            "vnp_TxnRef" => $vnp_TxnRef,
-            "vnp_OrderInfo" => $vnp_OrderInfo,
-            //$vnp_TransactionNo= ;
-            "vnp_TransactionDate" => $vnp_TransactionDate,
-            "vnp_CreateDate" => $vnp_CreateDate,
-            "vnp_IpAddr" => $vnp_IpAddr
-        );
+        $orderId = $request->orderId;
+        $endpoint = "https://test-payment.momo.vn/v2/gateway/api/query";
+        $partnerCode = Config::get('env.momo.partner_code');
+        $accessKey = Config::get('env.momo.access_key');
+        $secretKey = Config::get('env.momo.secret_key');
+        $requestId = time()."";
+        //before sign HMAC SHA256 signature
+        $rawHash = "accessKey=".$accessKey."&orderId=".$orderId."&partnerCode=".$partnerCode."&requestId=".$requestId;
+        // echo "<script>console.log('Debug Objects: " . $rawHash . "' );</script>";
 
-        $format = '%s|%s|%s|%s|%s|%s|%s|%s|%s';
+        $signature = hash_hmac("sha256", $rawHash, $secretKey);
 
-        $dataHash = sprintf(
-            $format,
-            $datarq['vnp_RequestId'], //1
-            $datarq['vnp_Version'], //2
-            $datarq['vnp_Command'], //3
-            $datarq['vnp_TmnCode'], //4
-            $datarq['vnp_TxnRef'], //5
-            $datarq['vnp_TransactionDate'], //6
-            $datarq['vnp_CreateDate'], //7
-            $datarq['vnp_IpAddr'], //8
-            $datarq['vnp_OrderInfo']//9
-        );
+        $data = array('partnerCode' => $partnerCode,
+            'requestId' => $requestId,
+            'orderId' => $orderId,
+            'requestType' => "payWithATM",
+            'signature' => $signature,
+            'lang' => 'vi');
+        $result = $this->execPostRequest($endpoint, json_encode($data));
+        $jsonResult = json_decode($result, true);  // decode json
+        $resultCode = $jsonResult['resultCode'];
 
-        $checksum = hash_hmac('SHA512', $dataHash, $vnp_HashSecret);
-        $datarq["vnp_SecureHash"] = $checksum;
-        $txnData = $this->callAPI_auth("POST", $apiUrl, json_encode($datarq));
-        $ispTxn = json_decode($txnData, true);
-        $pay = Trans::where('tst_code', $request->vnp_TxnRef)->first();
+        $explode = explode('-SA', $orderId);
+        $id = $explode[0];
+        $pay = Transaction::where('id',$id)->first();
         if ($pay) {
-            if($ispTxn['vnp_ResponseCode'] == "00") {
+            if($resultCode == 0) {
                 $pay->tst_status = 2;
             } else {
                 $pay->tst_status = -1;
@@ -262,35 +247,22 @@ class ShoppingCartController extends Controller
         return redirect()->to('/');
     }
 
-    public function callAPI_auth($method, $url, $data) {
-        $curl = curl_init();
-        switch ($method) {
-            case "POST":
-                curl_setopt($curl, CURLOPT_POST, 1);
-                if ($data)
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                break;
-            case "PUT":
-                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
-                if ($data)
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                break;
-            default:
-                if ($data)
-                    $url = sprintf("%s?%s", $url, http_build_query($data));
-        }
-        // OPTIONS:
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/json'
-        ));
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        // EXECUTE:
-        $result = curl_exec($curl);
-        if (!$result) {
-            die("Connection Failure");
-        }
-        curl_close($curl);
+    function execPostRequest($url, $data)
+    {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($data))
+        );
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        //execute post
+        $result = curl_exec($ch);
+        //close connection
+        curl_close($ch);
         return $result;
     }
 }

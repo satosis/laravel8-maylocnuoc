@@ -45,6 +45,10 @@ class Product extends Model
         return $this->belongsTo(Order::class, 'od_product_id');
     }
 
+    public function admin(){
+        return $this->belongsTo(Admin::class, 'pro_admin_id');
+    }
+
     public function keywords(){
         return $this->belongsTo(ProductKeyword::class, 'pk_product_id');
     }
