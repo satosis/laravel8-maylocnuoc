@@ -16,14 +16,14 @@
 
         <!-- Main content -->
         <section class="content">
-            <table class="table text-center">
+            <table class="table">
                 <thead>
-                <td>#</td>
-                <td>Từ khóa</td>
-                <td>Mô tả</td>
-                <td>Hot</td>
-                <td>Status</td>
-                <td>Hành động</td>
+                <th>STT</th>
+                <th>Từ khóa</th>
+                <th>Mô tả</th>
+                <th>Hot</th>
+                <th>Status</th>
+                <th>Hành động</th>
                 </thead>
                 @foreach($keyword as $list)
                     <tbody>

@@ -205,7 +205,7 @@ class ShoppingCartController extends Controller
             'type' => 'success',
             'message' => 'Đặt hàng thành công'
         ]);
-        // Cart::destroy();
+        Cart::destroy();
         return $transaction->id;
     }
 
@@ -235,7 +235,7 @@ class ShoppingCartController extends Controller
 
         $explode = explode('-SA', $orderId);
         $id = $explode[0];
-        $pay = Transaction::where('id',$id)->first();
+        $pay = Trans::where('id',$id)->first();
         if ($pay) {
             if($resultCode == 0) {
                 $pay->tst_status = 2;

@@ -1,7 +1,7 @@
 <table class="table table-condensed">
     <tbody>
     <tr>
-        <th>#</th>
+        <th>STT</th>
         <th>Tên</th>
         <th>Ảnh</th>
         <th>Giá</th>

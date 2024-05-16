@@ -15,7 +15,7 @@
         <section class="content">
             <table class="table text-center">
                 <thead>
-                <td>#</td>
+                <th>STT</th>
                 <td>Tên bài viết</td>
                 <td>Nổi bật</td>
                 <td>Trạng thái</td>

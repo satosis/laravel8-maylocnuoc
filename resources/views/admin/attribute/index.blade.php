@@ -18,7 +18,7 @@
         <section class="content">
             <table class="table text-center">
                 <thead>
-                <td>#</td>
+                <th>STT</th>
                 <td>Thuộc tính</td>
                 <td>Thể loại</td>
                 <td>Danh mục</td>

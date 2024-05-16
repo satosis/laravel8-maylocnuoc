@@ -17,15 +17,15 @@
         <!-- Main content -->
         <section class="content">
             <div class="col-md-12">
-                <table class="table text-center">
+                <table class="table">
                     <tbody>
                     <tr>
-                        <th>#</th>
-                        <th>Tên</th>
-                        <th>Thể loại</th>
+                        <th>STT</th>
+                        <th style="width: 360px;">Tên</th>
+                        <th style="width: 180px;">Thể loại</th>
                         <th>Thời gian cập nhật</th>
                         <th>Thời gian tạo</th>
-                        <th>Hành động</th>
+                        <th style="width: 200px;">Hành động</th>
                     </tr>
                     @if($category)
                         @foreach($category as $list)

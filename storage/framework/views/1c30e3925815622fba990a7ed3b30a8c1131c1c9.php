@@ -1,5 +1,5 @@
-@extends('layout.admin')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <style>li {
             list-style: none
         }</style>
@@ -13,22 +13,22 @@
                 <div class="box-header with-border">
                     <div class="box-title">
                         <form class="form-inline">
-                            <input type="text" class="form-control" value="{{ Request::get('id') }}" name="id"
+                            <input type="text" class="form-control" value="<?php echo e(Request::get('id')); ?>" name="id"
                                    placeholder="ID">
-                            <input type="text" class="form-control" value="{{ Request::get('email') }}" name="email"
+                            <input type="text" class="form-control" value="<?php echo e(Request::get('email')); ?>" name="email"
                                    placeholder="Email ...">
                             <select name="status" class="form-control">
                                 <option value="">Trạng thái</option>
-                                <option value="1" {{ Request::get('status') == 1 ? "selected='selected'" : "" }}>Tiếp
+                                <option value="1" <?php echo e(Request::get('status') == 1 ? "selected='selected'" : ""); ?>>Tiếp
                                     nhận
                                 </option>
-                                <option value="2" {{ Request::get('status') == 2 ? "selected='selected'" : "" }}>Đang
+                                <option value="2" <?php echo e(Request::get('status') == 2 ? "selected='selected'" : ""); ?>>Đang
                                     vận chuyển
                                 </option>
-                                <option value="3" {{ Request::get('status') == 3 ? "selected='selected'" : "" }}>Đã bàn
+                                <option value="3" <?php echo e(Request::get('status') == 3 ? "selected='selected'" : ""); ?>>Đã bàn
                                     giao
                                 </option>
-                                <option value="4" {{ Request::get('status') == 4 ? "selected='selected'" : "" }}>Huỷ
+                                <option value="4" <?php echo e(Request::get('status') == 4 ? "selected='selected'" : ""); ?>>Huỷ
                                     bỏ
                                 </option>
                             </select>
@@ -48,40 +48,41 @@
                         <th>Thời gian</th>
                         <th>Hành động</th>
                         </thead>
-                        @if(!count($transaction))
+                        <?php if(!count($transaction)): ?>
                             <tbody>
                             <tr>
                                 <th colspan="7">Không có đơn hàng mới</th>
                             </tr>
                             </tbody>
-                        @endif
-                        @foreach($transaction as $key =>$list)
+                        <?php endif; ?>
+                        <?php $__currentLoopData = $transaction; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key =>$list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tbody>
-                            <td>{{ $list->id }}</td>
+                            <td><?php echo e($list->id); ?></td>
                             <td>
                                 <div>
-                                    <li>Tên :{{ $list->tst_name}}</li>
-                                    <li>Email: {{ $list->tst_email }}</li>
-                                    <li>Điện thoại :{{ $list->tst_phone}}</li>
-                                    <li>Địa chỉ: {{ $list->tst_address }}</li>
-                                    <li>Ghi chú: {{ $list->tst_note }}</li>
+                                    <li>Tên :<?php echo e($list->tst_name); ?></li>
+                                    <li>Email: <?php echo e($list->tst_email); ?></li>
+                                    <li>Điện thoại :<?php echo e($list->tst_phone); ?></li>
+                                    <li>Địa chỉ: <?php echo e($list->tst_address); ?></li>
+                                    <li>Ghi chú: <?php echo e($list->tst_note); ?></li>
                                 </div>
                             </td>
-                            <td>{{ number_format( $list->tst_total_money , 0, '.', ',') }} đ</td>
-                            <td>@if($list->tst_type ==1 )
+                            <td><?php echo e(number_format( $list->tst_total_money , 0, '.', ',')); ?> đ</td>
+                            <td><?php if($list->tst_type ==1 ): ?>
                                     Trực tiếp
-                                @elseif($list->tst_type ==2 )
+                                <?php elseif($list->tst_type ==2 ): ?>
                                     Momo
-                                @endif
+                                <?php endif; ?>
                             </td>
                             <td>
-      <span class="{{ $list->getStatus($list->tst_status)['class'] }}">
-      {{ $list->getStatus($list->tst_status)['name']}}
+      <span class="<?php echo e($list->getStatus($list->tst_status)['class']); ?>">
+      <?php echo e($list->getStatus($list->tst_status)['name']); ?>
+
       </span></td>
-                            <td>{{ $list->created_at}}</td>
+                            <td><?php echo e($list->created_at); ?></td>
                             <td>
-                                <a data-id="{{ $key }}" href="javascript:;"
-                                   data-href="{{ route('ajax.admin.transaction.detail',$list->id)}}" class="label label-primary js-preview-transaction
+                                <a data-id="<?php echo e($key); ?>" href="javascript:;"
+                                   data-href="<?php echo e(route('ajax.admin.transaction.detail',$list->id)); ?>" class="label label-primary js-preview-transaction
       "><i class="fa fa-eye"></i> Xem</a>
 
                                 <div class="btn-group">
@@ -92,24 +93,25 @@
                                         <span class="sr-only">Toggle Dropdown</span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="{{ route('admin.action.transaction',['process',$list->id])}}"><i
+                                        <li><a href="<?php echo e(route('admin.action.transaction',['process',$list->id])); ?>"><i
                                                         class="fa fa-ban"></i>Đang bàn giao</a></li>
-                                        <li><a href="{{ route('admin.action.transaction',['success',$list->id])}}"><i
+                                        <li><a href="<?php echo e(route('admin.action.transaction',['success',$list->id])); ?>"><i
                                                         class="fa fa-ban"></i>Đã bàn giao</a></li>
-                                        <li><a href="{{ route('admin.action.transaction',['confirm',$list->id])}}"><i
+                                        <li><a href="<?php echo e(route('admin.action.transaction',['confirm',$list->id])); ?>"><i
                                                         class="fa fa-ban"></i>Người dùng đã xác nhận</a></li>
-                                        <li><a href="{{ route('admin.action.transaction',['cancel',$list->id])}}"><i
+                                        <li><a href="<?php echo e(route('admin.action.transaction',['cancel',$list->id])); ?>"><i
                                                         class="fa fa-ban"></i>Hủy</a></li>
                                     </ul>
                                 </div>
                             </td>
                             </tbody>
 
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </table>
         </section>
         <div class="box-footer">
-            {!! $transaction->appends($query ?? [])->links() !!}
+            <?php echo $transaction->appends($query ?? [])->links(); ?>
+
         </div>
         <!-- /.content -->
     </div>
@@ -136,4 +138,6 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\project\tesst\resources\views/admin/transaction/index.blade.php ENDPATH**/ ?>

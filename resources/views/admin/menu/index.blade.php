@@ -19,7 +19,7 @@
             <div class="col-md-12">
                 <table class="table text-center">
                     <thead>
-                    <th>#</th>
+                    <th>STT</th>
                     <th>Tên</th>
                     <th>Ảnh</th>
                     <th>Status</th>

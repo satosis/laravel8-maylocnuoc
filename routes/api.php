@@ -45,4 +45,4 @@ Route::group(['namespace' => 'Api','middleware' => 'auth:api'], function () {
         Route::get('orders/{status}','ShoppingCartController@orders');
     });
 });
-Route::get('/payment/vnpay/callback','Frontend\ShoppingCartController@callback');
+Route::get('/payment/momo/callback','Frontend\ShoppingCartController@callback');

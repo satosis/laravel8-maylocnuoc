@@ -1,5 +1,5 @@
-@extends('layout.admin')
-@section('content')
+
+<?php $__env->startSection('content'); ?>
     <title>Thông tin sản phẩm</title>
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -23,23 +23,26 @@
                 <th>Đăng nhập bằng</th>
                 <th>Tạo ngày</th>
                 </thead>
-                @foreach($user as $list )
+                <?php $__currentLoopData = $user; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <tbody>
-                    <td>{{ $list->id}}</td>
-                    <td>{{ $list->name}}</td>
-                    <td>{{ $list->phone}}</td>
-                    <td>{{ $list->provider ?? "Trực tiếp"}}</td>
-                    <td>{{ $list->created_at}}</td>
+                    <td><?php echo e($list->id); ?></td>
+                    <td><?php echo e($list->name); ?></td>
+                    <td><?php echo e($list->phone); ?></td>
+                    <td><?php echo e($list->provider ?? "Trực tiếp"); ?></td>
+                    <td><?php echo e($list->created_at); ?></td>
 
                     </tbody>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </table>
         </section>
         <div class="box-footer">
-            {!! $user->links() !!}
+            <?php echo $user->links(); ?>
+
         </div>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
-@stop
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layout.admin', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\project\tesst\resources\views/admin/user/index.blade.php ENDPATH**/ ?>

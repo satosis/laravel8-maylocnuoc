@@ -16,25 +16,26 @@
 
         <!-- Main content -->
         <section class="content">
-            <table class="table text-center">
+            <table class="table">
                 <thead>
-                <td>#</td>
-                <td>Tên sản phẩm</td>
-                <td>Giá</td>
-                <td>Giảm giá</td>
-                <td>Ảnh</td>
-                <td>Hot</td>
-                <td>Trạng thái</td>
-                <td>Số lượt mua</td>
-                <td>Hành động</td>
+                <th>STT</th>
+                <th>Tên sản phẩm</th>
+                <th style="width: 150px;">Giá</th>
+                <th>Giảm giá</th>
+                <th>Ảnh</th>
+                <th>Lượt mua</th>
+                <th>Hot</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
                 </thead>
                 @foreach($product as $key => $list )
                     <tbody>
                     <td>{{ ((Request::get('page') ?? 1) - 1) * 10 + $key + 1 }}</td>
                     <td>{{ $list->pro_name}}</td>
                     <td>{{ $list->pro_price}}</td>
-                    <td>{{ $list->pro_sale}}</td>
+                    <td>{{ $list->pro_sale }}</td>
                     <td><img src="{{ $list->pro_avatar }}" style="width:80px;height:100px"></td>
+                    <td>{{ $list->pro_pay }}</td>
                     <td>
                         @if($list->pro_hot == 1)
                             <a href="{{route('admin.product.hot',$list->id) }}" class="btn btn-primary">Hot</a>
@@ -49,7 +50,6 @@
                             <a href="{{route('admin.product.active',$list->id) }}" class="btn btn-primary">Hiện</a>
                         @endif
                     </td>
-                    <td>{{$list->pro_pay }}</td>
                     <td>
                         <a href="{{route('admin.product.update',$list->id) }}" class="btn btn-primary"><i
                                     class="fa fa-edit"></i> Sửa</a>

@@ -1,5 +1,5 @@
-@include('layout.component.header')
-<title>{{isset($login) ? 'Đăng nhập' : '' }} {{isset($register) ? 'Đăng ký  ' : '' }}</title>
+<?php echo $__env->make('layout.component.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<title><?php echo e(isset($login) ? 'Đăng nhập' : ''); ?> <?php echo e(isset($register) ? 'Đăng ký  ' : ''); ?></title>
 <style>
     .form-control {
         display: block;
@@ -88,60 +88,61 @@
 </style>
 <div class="container" >
     <form action="" method="POST" role="form" class="col-md-8" style="margin:50px 0">
-        @csrf
+        <?php echo csrf_field(); ?>
 
-        @if($errors->first('msg'))
-            <p class="red">{{$errors->first('msg') }}  </p>
-        @endif
-        <div class="form-group {{ $errors->first('name') ? ' has-error':'' }} {{ isset($reset) ? 'd-none' :'' }} {{ isset($login) ?'d-none' : ''}} ">
+        <?php if($errors->first('msg')): ?>
+            <p class="red"><?php echo e($errors->first('msg')); ?>  </p>
+        <?php endif; ?>
+        <div class="form-group <?php echo e($errors->first('name') ? ' has-error':''); ?> <?php echo e(isset($reset) ? 'd-none' :''); ?> <?php echo e(isset($login) ?'d-none' : ''); ?> ">
             <label for="exampleInputEmail1">Name <b class="red">(*)</b> </label>
             <input type="text" name="name" class="form-control" id="exampleInputEmail1"
-                   value="{{ isset($login->name) ?? old('name','')  }}" autocomplete="off">
-            @if ($errors->first('name'))
-                <p class="text-danger">{{$errors->first('name') }}  </p>
-            @endif
+                   value="<?php echo e(isset($login->name) ?? old('name','')); ?>" autocomplete="off">
+            <?php if($errors->first('name')): ?>
+                <p class="text-danger"><?php echo e($errors->first('name')); ?>  </p>
+            <?php endif; ?>
         </div>
 
-        <div class="form-group {{ $errors->first('email') ? ' has-error':'' }}">
+        <div class="form-group <?php echo e($errors->first('email') ? ' has-error':''); ?>">
             <label for="xampleInputEmail1">Email <b class="red">(*)</b> </label>
             <input type="text" name="email" class="form-control" id="xampleInputEmail1" value="user@gmail.com"
                    autocomplete="off">
-            @if ($errors->first('email'))
-                <p class="text-danger">{{$errors->first('email') }}  </p>
-            @endif
+            <?php if($errors->first('email')): ?>
+                <p class="text-danger"><?php echo e($errors->first('email')); ?>  </p>
+            <?php endif; ?>
         </div>
 
-        <div class="form-group {{ isset($reset) ? 'd-none' :'' }} {{ $errors->first('password') ? ' has-error':'' }}">
+        <div class="form-group <?php echo e(isset($reset) ? 'd-none' :''); ?> <?php echo e($errors->first('password') ? ' has-error':''); ?>">
             <label for="xampleInputEmai1">Password <b class="red">(*)</b> </label>
             <input type="password" name="password" value="123456789" class="form-control" id="xampleInputEmai1"
                    autocomplete="off">
-            @if ($errors->first('password'))
-                <p class="text-danger">{{$errors->first('password') }}  </p>
-            @endif
+            <?php if($errors->first('password')): ?>
+                <p class="text-danger"><?php echo e($errors->first('password')); ?>  </p>
+            <?php endif; ?>
         </div>
 
-        <div class="form-group {{ isset($reset) ? 'd-none' :'' }} {{ $errors->first('phone') ? ' has-error':'' }}  {{ isset($login) ?'d-none' : ''}}">
+        <div class="form-group <?php echo e(isset($reset) ? 'd-none' :''); ?> <?php echo e($errors->first('phone') ? ' has-error':''); ?>  <?php echo e(isset($login) ?'d-none' : ''); ?>">
             <label for="ampleInputphone1">Điện thoại <b class="red">(*)</b> </label>
             <input type="text" name="phone" class="form-control" id="ampleInputphone1" autocomplete="off">
-            @if ($errors->first('phone'))
-                <p class="text-danger">{{$errors->first('phone') }}  </p>
-            @endif
+            <?php if($errors->first('phone')): ?>
+                <p class="text-danger"><?php echo e($errors->first('phone')); ?>  </p>
+            <?php endif; ?>
         </div>
         <br>
         <div class="text-center">
-            <button type="submit" class="btn btn-primary" style="padding: 10px 50px"> {{ isset($login) ? 'Đăng nhập' : 'Đăng ký' }}</button>
+            <button type="submit" class="btn btn-primary" style="padding: 10px 50px"> <?php echo e(isset($login) ? 'Đăng nhập' : 'Đăng ký'); ?></button>
         </div>
 
         <div class="d-flex" style="display:flex;margin-top:20px">
-        <a class="{{ isset($login) ? 'd-none' :''}}" href="{{route('get.login') }}">Đăng nhập</a><br>
-        <a class="{{ isset($register) ? 'd-none' :''}}" href="{{route('get.register') }}">Đăng ký</a><br>
+        <a class="<?php echo e(isset($login) ? 'd-none' :''); ?>" href="<?php echo e(route('get.login')); ?>">Đăng nhập</a><br>
+        <a class="<?php echo e(isset($register) ? 'd-none' :''); ?>" href="<?php echo e(route('get.register')); ?>">Đăng ký</a><br>
         </div>
         <hr>
-        <a href="{{url('/auth/redirect/google')}}" class="btn btn-danger" style="width: 100%;color:white">
+        <a href="<?php echo e(url('/auth/redirect/google')); ?>" class="btn btn-danger" style="width: 100%;color:white">
             <i class="fa fa-google"></i> GOOGLE
         </a>
     </form>
     <br>
 
 </div>
-@include('layout.component.footer')
+<?php echo $__env->make('layout.component.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php /**PATH D:\project\tesst\resources\views/auth/app.blade.php ENDPATH**/ ?>

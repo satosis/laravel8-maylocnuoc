@@ -65,7 +65,7 @@ class LoginController extends Controller
             ]);
             return redirect()->intended('/');
         }
-        return redirect()->back();
+        return redirect()->back()->withErrors(['msg' => 'Sai tài khoản hoặc mật khẩu']);
     }
 
     public function getLogout()
