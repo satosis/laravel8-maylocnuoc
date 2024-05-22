@@ -7,6 +7,7 @@ use App\Http\Requests\AdminRequestProduct;
 use App\Models\Category;
 use App\Models\Keyword;
 use App\Models\Product;
+use App\Models\ProductKeyword;
 use Carbon\Carbon;
 use DB;
 use File;
@@ -60,15 +61,15 @@ class AdminProductController extends Controller
     private function syncKeyword($keyword, $idProduct)
     {
         if (!empty($keyword)) {
+            ProductKeyword::where('pk_product_id', $idProduct)->delete();
             $data = [];
             foreach ($keyword as $key => $keywords) {
                 $data = [
                     'pk_product_id' => $idProduct,
                     'pk_keyword_id' => $keywords
                 ];
+                ProductKeyword::insert($data);
             }
-            DB::table('product_keywords')->where('pk_product_id', $idProduct)->delete();
-            DB::table('product_attributes')->insert($data);
         }
     }
 
@@ -133,6 +134,7 @@ class AdminProductController extends Controller
         $data = $request->except("_token", 'thumbnail_stage', 'attribute', 'keywords', 'file');
         $data['pro_slug'] = Str::slug($request->pro_name);
         $data['updated_at'] = Carbon::now();
+        $this->syncKeyword($request->keywords, $id);
         if ($request->thumbnail_stage) {
             $image = upload_image('thumbnail_stage');
             if ($image['code'] == 1) {
