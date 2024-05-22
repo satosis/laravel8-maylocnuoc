@@ -31,7 +31,7 @@
                 @foreach($product as $key => $list )
                     <tbody>
                     <td>{{ ((Request::get('page') ?? 1) - 1) * 10 + $key + 1 }}</td>
-                    <td>{{ $list->pro_name}}</td>
+                    <td>{{ $list->pro_name}}<br><b>Danh mục:</b> {{ $list->category->c_name }}</td>
                     <td>{{ $list->pro_price}}</td>
                     <td>{{ $list->pro_sale }}</td>
                     <td><img src="{{ $list->pro_avatar }}" style="width:80px;height:100px"></td>
