@@ -35,7 +35,7 @@
                                 <td>
                                     @if ($list->c_cate == 'watch')
                                         Máy lọc nước
-                                    @elseif ($list->c_cate == 'watch')
+                                    @elseif ($list->c_cate == 'glass')
                                         THIẾT BỊ LỌC NƯỚC
                                     @else
                                         THIẾT BỊ ĐO
