@@ -38,6 +38,7 @@ class AdminProductController extends Controller
 
     public function store(AdminRequestProduct $request)
     {
+        $request->pro_name = trim($request->pro_name);
         $data = $request->except('_token', 'thumbnail_stage', 'attribute', 'keywords', 'file');
         $data['pro_admin_id'] = get_data_user('admins', 'id');
         $data['pro_slug'] = Str::slug($data['pro_name']);
@@ -130,6 +131,7 @@ class AdminProductController extends Controller
 
     public function update(AdminRequestProduct $request, $id)
     {
+        $request->pro_name = trim($request->pro_name);
         $product = Product::find($id);
         $data = $request->except("_token", 'thumbnail_stage', 'attribute', 'keywords', 'file');
         $data['pro_slug'] = Str::slug($request->pro_name);
