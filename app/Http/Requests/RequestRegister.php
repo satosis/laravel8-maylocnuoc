@@ -26,7 +26,7 @@ class RequestRegister extends FormRequest
         return [
             'email'             =>'required|email|min:5|max:180|unique:users,email',
             'name'              =>'required|min:5|max:180',
-            'password'          =>'required|min:8|max:16|regex:/[h-s2-6]/ig',
+            'password'          =>'required|min:8|max:16',
             'phone'             =>'required|min:10|max:11|unique:users,phone',
 
         ];
