@@ -10,6 +10,12 @@ class Category extends Model
     protected $guarded=[''];
 
     public function products(){
-        return $this->belongsTo(Product::class,'id');
+        return $this->hasMany(Product::class,'id');
+    }
+
+    protected static function booted () {
+        static::deleting(function(Category $category) {
+            Product::where("pro_category", $category->id)->delete();
+        });
     }
 }
