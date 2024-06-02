@@ -15,7 +15,7 @@ class CategoryDetailController extends Controller
         $id =array_pop($arraySlug);
 
         if($id){
-            $cate =Category::with('product')->findOrFail($id);
+            $cate =Category::with('products')->findOrFail($id);
             $products =Product::where([
                 'pro_category' => $id,
                 'pro_active'   => 1

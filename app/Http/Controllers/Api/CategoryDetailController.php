@@ -11,7 +11,7 @@ class CategoryDetailController extends Controller
 {
     public function getCategoryDetail(Request $request, $slug)
     {
-        $cate = Category::with('product')->where('c_slug', $slug)->first();
+        $cate = Category::with('products')->where('c_slug', $slug)->first();
         $products = Product::where([
             'pro_category' => $cate->id,
             'pro_active' => 1

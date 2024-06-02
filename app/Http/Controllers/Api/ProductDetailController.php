@@ -17,7 +17,7 @@ class ProductDetailController extends Controller
         $product = Product::where('pro_slug', $slug)->with('category:id,c_name,c_slug', 'keyword')->first();
         $user_favourite = DB::table('user_favourite')->where('uf_product_id', $product->id)
             ->where('uf_user_id', Auth::id())->count();
-        ProcessViewService::view('product', 'pro_view', 'product', $product->id);
+        ProcessViewService::view('products', 'pro_view', 'products', $product->id);
 
         //bài viết đánh giá chung
         $ratings = Rating::with('user:id,name')
@@ -55,7 +55,7 @@ class ProductDetailController extends Controller
             'user_favourite' => $user_favourite,
             'productSuggest' => $this->getProductsSuggest($product->pro_category)
         ];
-        DB::table('product')
+        DB::table('products')
             ->where('id', $product->id)
             ->increment('pro_view');
         return response()->json($viewData);

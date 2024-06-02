@@ -225,10 +225,10 @@ class ShoppingCartController extends Controller
                     'od_price' => $item->price
                 ]);
                 //Tăng số lượt mua của sản phẩm
-                DB::table('product')
+                DB::table('products')
                     ->where('id', $item->id)
                     ->increment("pro_pay");
-                DB::table('product')
+                DB::table('products')
                     ->where('id', $item->id)
                     ->decrement("pro_amount");
             }
@@ -285,9 +285,9 @@ class ShoppingCartController extends Controller
         $category = Category::all();
         $transaction = Trans::where('tst_user_id', Auth::user()->id)
             ->where('tst_status', '!=', '5')
-            ->select('transactions.*', 'product.*', 'orders.*', 'product.id as pro_id', 'transactions.created_at as time', 'transactions.id as trans_id',)
+            ->select('transactions.*', 'products.*', 'orders.*', 'products.id as pro_id', 'transactions.created_at as time', 'transactions.id as trans_id',)
             ->leftJoin('orders', 'orders.od_transaction_id', 'transactions.id')
-            ->leftjoin('product', 'product.id', 'orders.od_product_id')
+            ->leftjoin('products', 'products.id', 'orders.od_product_id')
             ->orderBy('transactions.id', 'desc');
         if ($status != 0) {
             $transaction->where('tst_status', $status);

@@ -17,7 +17,7 @@ class CreateProductImagesTable extends Migration
             $table->id();
             $table->string('al_name')->nullable();
             $table->string('al_slug')->nullable();
-            $table->foreignId('product_id')->constrained('product');
+            $table->foreignId('product_id')->constrained('products');
             $table->timestamps();
         });
     }

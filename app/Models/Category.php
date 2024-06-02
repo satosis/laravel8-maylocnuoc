@@ -9,7 +9,7 @@ class Category extends Model
     protected $table='category';
     protected $guarded=[''];
 
-    public function product(){
+    public function products(){
         return $this->belongsTo(Product::class,'id');
     }
 }

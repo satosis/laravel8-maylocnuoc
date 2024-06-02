@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 class Product extends Model
 {
-    protected $table='product';
+    protected $table='products';
     protected $guarded=[''];
     protected $country =[
         '0' =>'[N\A]',

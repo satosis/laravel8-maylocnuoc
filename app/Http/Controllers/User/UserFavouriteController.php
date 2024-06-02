@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
+
 class UserFavouriteController extends Controller
 {
     public function index(){
@@ -39,16 +40,14 @@ class UserFavouriteController extends Controller
                 'uf_user_id'    => \Auth::id()
             ]);
 
-            \DB::table('product')
-            ->where('id',$id)
+            Product::where('id',$id)
             ->increment('pro_favourite');
             $status="1";
         } else if($user_favourite->count()!= 0) {
             $count=$count-1;
             $user_favourite->delete();
 
-            \DB::table('product')
-            ->where('id',$id)
+            Product::where('id',$id)
             ->decrement('pro_favourite');
             $status="2";
         }
