@@ -5,7 +5,6 @@ Route::group(['prefix'=>'user','namespace'=>'User','middleware'=>'check_user_log
         Route::get('profile','UserController@profile')->name('get.user.profile');
 
         Route::post('ajax_favourite/{idProduct}','UserFavouriteController@addFavourite')->name('ajax_get.user.favourite');
-        Route::get('ajax_favourite/{idProduct}','UserFavouriteController@addFavourite')->name('ajax_get.get.user.favourite');
 
         Route::post('ajax_rating','UserRatingController@RatingProduct')->name('ajax_post.user.rating.add');
 
